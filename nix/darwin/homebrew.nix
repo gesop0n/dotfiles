@@ -25,9 +25,7 @@
     brews = [];
 
     casks = [
-      # "wezterm"
-      #
-      "clipy"
+      "maccy"
     ];
   };
 }
