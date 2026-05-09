@@ -19,9 +19,12 @@
   # git
   programs.git = {
     enable = true;
-    userName = "gesop0n";
-    userEmail = "ishikuro6.2@gmail.com";  # ← 変更してください
-    extraConfig = {
+
+    settings = {
+      user = {
+        name = "gesop0n";
+        email = "ishikuro6.2@gmail.com";
+      };
       init.defaultBranch = "main";
       pull.rebase = true;
     };
@@ -33,6 +36,10 @@
     defaultEditor = true;
     vimAlias = true;
     viAlias = true;
+  };
+
+  programs.zsh = {
+    enable = true;
   };
 
   # Let Home Manager install and manage itself.

@@ -1,4 +1,4 @@
-{ self, nix-darwin, home-manager }:
+{ self, nix-darwin, home-manager, nix-homebrew }:
 nix-darwin.lib.darwinSystem {
   modules = [
     ({ pkgs, ... }: {
@@ -35,6 +35,7 @@ nix-darwin.lib.darwinSystem {
       home-manager.users.gesopon = import ../home-manager/default.nix;
     }
 
+    nix-homebrew.darwinModules.nix-homebrew
     ./homebrew.nix
   ];
 }

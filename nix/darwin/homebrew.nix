@@ -1,8 +1,7 @@
+{ ... }:
 {
-  nix-brew,
-  ...
-}:
-{
+  system.primaryUser = "gesopon";
+
   nix-homebrew = {
     enable = true;
     user = "gesopon";
@@ -22,6 +21,11 @@
   # ----------
   homebrew = {
     enable = true;
-    user = "gesopon";
+
+    brews = [];
+
+    casks = [
+      # "wezterm"
+    ];
   };
 }
