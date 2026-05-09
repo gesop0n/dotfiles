@@ -6,6 +6,7 @@
     ./git.nix
     ./neovim.nix
     ./zsh.nix
+    ./oh-my-posh.nix
     ./wezterm.nix
     ./mise.nix
     ./hammerspoon.nix
