@@ -8,6 +8,7 @@
     ./zsh.nix
     ./wezterm.nix
     ./mise.nix
+    ./hammerspoon.nix
   ];
 
   home.username = "gesopon";

@@ -26,6 +26,7 @@
 
     casks = [
       "maccy"
+      "hammerspoon"
     ];
   };
 }

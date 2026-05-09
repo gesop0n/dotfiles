@@ -1,7 +1,7 @@
 { ... }:
 {
   home.shellAliases = {
-    rebuild = "sudo darwin-rebuild switch --flake ~/dotfiles";
+    home-rebuild = "sudo darwin-rebuild switch --flake ~/dotfiles";
     reload = "exec $SHELL -l";
 
     ls = "eza ";
