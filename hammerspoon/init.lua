@@ -2,6 +2,8 @@
 -- HYPER key = ctrl + opt + cmd (ShiftIt互換)
 -- ============================================================
 
+hs.window.animationDuration = 0
+
 local hyper = { 'ctrl', 'alt', 'cmd' }
 
 -- ユーティリティ: 現在のフォーカスウィンドウを取得
@@ -35,10 +37,15 @@ hs.hotkey.bind(hyper, 'I', function() move(0.5, 0, 0.5, 0.5) end)   -- 右上
 hs.hotkey.bind(hyper, 'J', function() move(0, 0.5, 0.5, 0.5) end)   -- 左下
 hs.hotkey.bind(hyper, 'K', function() move(0.5, 0.5, 0.5, 0.5) end) -- 右下
 
+hs.hotkey.bind(hyper, '1', function() move(0, 0, 0.5, 0.5) end)     -- 左上
+hs.hotkey.bind(hyper, '2', function() move(0.5, 0, 0.5, 0.5) end)   -- 右上
+hs.hotkey.bind(hyper, '3', function() move(0, 0.5, 0.5, 0.5) end)   -- 左下
+hs.hotkey.bind(hyper, '4', function() move(0.5, 0.5, 0.5, 0.5) end) -- 右下
+
 -- 最大化 / 中央寄せ
 -- ----------
-hs.hotkey.bind(hyper, 'M', function() move(0, 0, 1, 1) end)         -- 最大化
-hs.hotkey.bind(hyper, 'C', function() move(0.1, 0.1, 0.8, 0.8) end) -- 中央80%
+hs.hotkey.bind(hyper, 'M', function() move(0, 0, 1, 1) end)           -- 最大化
+hs.hotkey.bind(hyper, 'C', function() move(0.075, 0.075, 0.85, 0.85) end) -- 中央85%
 
 -- ディスプレイ移動: cmd + opt + ctrl + N → 次のスクリーンへ
 -- ----------
