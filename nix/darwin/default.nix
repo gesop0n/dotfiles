@@ -8,22 +8,15 @@
 }:
 nix-darwin.lib.darwinSystem {
   inherit system;
-  specialArgs = { inherit self system; };
+  specialArgs = { inherit self system claude-code-nix; };
 
   modules = [
     ./system.nix
+    ./packages.nix
+    ./defaults.nix
 
     home-manager.darwinModules.home-manager
-    {
-      # NOTE: Unable to build flake without home.homeDirectory error
-      # https://github.com/nix-community/home-manager/issues/6036
-      users.users.gesopon.home = "/Users/gesopon";
-
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.extraSpecialArgs = { inherit claude-code-nix system; };
-      home-manager.users.gesopon = import ../home-manager/default.nix;
-    }
+    ./home-manager.nix
 
     nix-homebrew.darwinModules.nix-homebrew
     ./homebrew.nix

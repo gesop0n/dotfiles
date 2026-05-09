@@ -2,6 +2,7 @@
 {
   imports = [
     ./packages.nix
+    ./aliases.nix
     ./git.nix
     ./neovim.nix
     ./zsh.nix

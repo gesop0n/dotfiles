@@ -1,12 +1,9 @@
 {
-  pkgs,
   self,
   system,
   ...
 }:
 {
-  environment.systemPackages = [ pkgs.vim ];
-
   nix.settings.experimental-features = "nix-command flakes";
 
   system.configurationRevision = self.rev or self.dirtyRev or null;
