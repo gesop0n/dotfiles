@@ -4,6 +4,6 @@
 {
   programs.oh-my-posh = {
     enable = true;
-    useTheme = "material.omp.json";
+    useTheme = "material";
   };
 }
