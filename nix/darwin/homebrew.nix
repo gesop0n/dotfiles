@@ -22,7 +22,7 @@
   homebrew = {
     enable = true;
 
-    brews = [];
+    brews = [ ];
 
     casks = [
       "maccy"

@@ -1,5 +1,5 @@
 # NOTE: https://nix-community.github.io/home-manager/index.xhtml#sec-usage-configuration
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -15,6 +15,8 @@
   # the Home Manager release notes for a list of state version
   # changes in each release.
   home.stateVersion = "25.11";
+
+  home.packages = with pkgs; [ nixd ];
 
   # git
   programs.git = {

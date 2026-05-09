@@ -21,12 +21,26 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, nix-homebrew }:
-  {
-    darwinConfigurations = {
-      "Kotas-MacBook-Pro" = import ./nix/darwin/default.nix {
-        inherit self nix-darwin home-manager nix-homebrew;
+  outputs =
+    {
+      self,
+      nix-darwin,
+      nixpkgs,
+      home-manager,
+      nix-homebrew,
+    }:
+    {
+      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-tree;
+
+      darwinConfigurations = {
+        "Kotas-MacBook-Pro" = import ./nix/darwin/default.nix {
+          inherit
+            self
+            nix-darwin
+            home-manager
+            nix-homebrew
+            ;
+        };
       };
     };
-  };
 }
