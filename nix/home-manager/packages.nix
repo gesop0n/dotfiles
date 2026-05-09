@@ -1,4 +1,9 @@
-{ pkgs, claude-code-nix, system, ... }:
+{
+  pkgs,
+  claude-code-nix,
+  system,
+  ...
+}:
 {
   home.packages = with pkgs; [
     nixd

@@ -1,4 +1,9 @@
-{ pkgs, self, system, ... }:
+{
+  pkgs,
+  self,
+  system,
+  ...
+}:
 {
   environment.systemPackages = [ pkgs.vim ];
 
