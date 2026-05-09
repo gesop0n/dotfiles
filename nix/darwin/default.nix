@@ -21,6 +21,9 @@ nix-darwin.lib.darwinSystem {
 
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
+
+      # For homebrew
+      programs.zsh.enable = true;
     })
 
     # Home Manager module for darwin.

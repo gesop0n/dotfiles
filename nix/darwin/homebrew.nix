@@ -26,6 +26,8 @@
 
     casks = [
       # "wezterm"
+      #
+      "clipy"
     ];
   };
 }
