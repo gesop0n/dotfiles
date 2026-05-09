@@ -34,5 +34,7 @@ nix-darwin.lib.darwinSystem {
       home-manager.useUserPackages = true;
       home-manager.users.gesopon = import ../home-manager/default.nix;
     }
+
+    ./homebrew.nix
   ];
 }
