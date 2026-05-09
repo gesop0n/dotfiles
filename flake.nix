@@ -19,6 +19,10 @@
     nix-homebrew = {
       url = "github:zhaofengli/nix-homebrew";
     };
+
+    claude-code-nix = {
+      url = "github:sadjow/claude-code-nix";
+    };
   };
 
   outputs =
@@ -28,9 +32,13 @@
       nixpkgs,
       home-manager,
       nix-homebrew,
+      claude-code-nix,
     }:
+    let
+      system = "aarch64-darwin";
+    in
     {
-      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-tree;
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-tree;
 
       darwinConfigurations = {
         "Kotas-MacBook-Pro" = import ./nix/darwin/default.nix {
@@ -39,6 +47,8 @@
             nix-darwin
             home-manager
             nix-homebrew
+            claude-code-nix
+            system
             ;
         };
       };
