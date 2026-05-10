@@ -2,12 +2,9 @@
 {
   programs.wezterm = {
     enable = true;
-    extraConfig = ''
-      local config = wezterm.config_builder()
-
-      config.font_size = 16.0
-
-      return config
-    '';
+    extraConfig = builtins.readFile ../../wezterm/wezterm.lua;
   };
+
+  xdg.configFile."wezterm/appearance.lua".source = ../../wezterm/appearance.lua;
+  xdg.configFile."wezterm/tabbar.lua".source = ../../wezterm/tabbar.lua;
 }
