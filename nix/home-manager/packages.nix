@@ -10,7 +10,7 @@
     # ----------
     eza
 
-    # LazyVim dependencies
+    # AstroNvim dependencies
     # ----------
     ripgrep
     fd
