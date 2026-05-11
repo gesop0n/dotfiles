@@ -10,6 +10,7 @@
     ./wezterm.nix
     ./mise.nix
     ./hammerspoon.nix
+    ./direnv.nix
   ];
 
   home.username = "gesopon";
