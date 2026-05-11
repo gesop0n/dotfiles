@@ -15,6 +15,7 @@
     # https://mynixos.com/nixpkgs/options/programs.zsh.autosuggestion
     autosuggestion = {
       enable = true;
+      highlight = "fg=#666666";
     };
   };
 }
