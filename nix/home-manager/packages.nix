@@ -10,6 +10,9 @@
     # ----------
     eza
 
+    # Git関連
+    gh
+
     # AstroNvim dependencies
     # ----------
     ripgrep
