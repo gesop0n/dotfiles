@@ -10,6 +10,13 @@
     # ----------
     eza
 
+    # LazyVim dependencies
+    # ----------
+    ripgrep
+    fd
+    lazygit
+    tree-sitter
+
     # LSPs
     # ----------
     nixd
