@@ -24,6 +24,10 @@
     # ----------
     nixd
 
+    # Neovim plugin dependencies
+    # ----------
+    deno
+
     # Agents
     # ----------
     claude-code-nix.packages.${system}.claude-code
