@@ -7,4 +7,5 @@
 
   xdg.configFile."wezterm/appearance.lua".source = ../../wezterm/appearance.lua;
   xdg.configFile."wezterm/tabbar.lua".source = ../../wezterm/tabbar.lua;
+  xdg.configFile."wezterm/keys.lua".source = ../../wezterm/keys.lua;
 }
