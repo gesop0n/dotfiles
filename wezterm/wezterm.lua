@@ -3,5 +3,6 @@ local config = wezterm.config_builder()
 
 require('appearance').apply(config)
 require('tabbar').apply(config)
+require('keys').apply(config)
 
 return config
