@@ -37,7 +37,7 @@ dotfiles/
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 ```
 
-インストール後、ターミナルを再起動してください。
+インストール後、ターミナルを再起動する. 
 
 ### 2. このリポジトリをクローン
 
@@ -52,7 +52,7 @@ cd ~/dotfiles
 darwin-rebuild switch --flake .
 ```
 
-初回は nix-darwin 自体のインストールが必要な場合があります：
+初回は nix-darwin 自体のインストールが必要な場合がある.
 
 ```bash
 nix run nix-darwin -- switch --flake .
@@ -64,7 +64,7 @@ nix run nix-darwin -- switch --flake .
 
 ### 設定の変更を反映する
 
-`nix/` 以下のファイルを編集したあと、以下で適用します：
+`nix/` 以下のファイルを編集したあと、以下で適用する.
 
 ```bash
 darwin-rebuild switch --flake ~/dotfiles
@@ -90,7 +90,7 @@ nix flake update
 nix flake update claude-code-nix
 ```
 
-更新後は `darwin-rebuild switch --flake .` で適用します。
+更新後は `darwin-rebuild switch --flake .` で適用する.
 
 ### flake の情報を確認する
 
@@ -123,17 +123,7 @@ nix shell nixpkgs#jq
 ```bash
 # 古い世代を削除してストアを最適化
 nix-collect-garbage -d
+# または
+nix store gc
 ```
 
----
-
-## ツール一覧
-
-| ツール | 概要 |
-|---|---|
-| [nix-darwin](https://github.com/nix-darwin/nix-darwin) | macOS のシステム設定を Nix で宣言的に管理 |
-| [home-manager](https://github.com/nix-community/home-manager) | ユーザー環境・dotfiles を Nix で管理 |
-| [WezTerm](https://wezfurlong.org/wezterm/) | GPU アクセラレート対応ターミナル |
-| [Neovim](https://neovim.io/) + [AstroNvim](https://astronvim.com/) | テキストエディタ |
-| [Hammerspoon](https://www.hammerspoon.org/) | macOS 自動化 |
-| [Claude Code](https://claude.ai/code) | AI コーディングアシスタント CLI |
