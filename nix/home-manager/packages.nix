@@ -31,5 +31,8 @@
     # Agents
     # ----------
     claude-code-nix.packages.${system}.claude-code
+
+    # 他ツール
+    obsidian
   ];
 }
