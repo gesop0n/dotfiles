@@ -17,6 +17,9 @@ function M.apply(config)
 
     -- ペインを閉じる
     { key = 'w', mods = 'CMD', action = act.CloseCurrentPane({ confirm = true }) },
+
+    -- Option+¥ でバックスラッシュを入力
+    { key = '¥', mods = 'OPT', action = act.SendString('\\') },
   }
 end
 
