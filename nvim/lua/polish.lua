@@ -1,5 +1,3 @@
-if true then return end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
--- This will run last in the setup process.
--- This is just pure lua so anything that doesn't
--- fit in the normal config locations above can go here
+-- プロジェクトローカルの .nvim.lua を読み込む（exrc 機能）
+vim.o.exrc = true
+vim.o.secure = true
