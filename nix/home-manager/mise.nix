@@ -3,11 +3,11 @@
   programs.mise = {
     enable = true;
     enableZshIntegration = true;
-    # globalConfig = {
-    #   tools = {
-    #     node = "22";
-    #     go = "latest";
-    #   };
-    # };
+    globalConfig = {
+      tools = {
+        node = "latest";
+        "npm:@dataform/cli" = "latest";
+      };
+    };
   };
 }
