@@ -12,7 +12,7 @@
       pull.rebase = true;
     };
 
-    # FYI: .gitconfig の includeIf の指定
+    # NOTE: .gitconfig の includeIf の指定
     # github.com/⚪︎⚪︎ のフォルダでユーザーを自動的に切り替える.
     # https://www.reddit.com/r/NixOS/comments/1atp50v/generate_string_to_file_without_double_quotes_in/
     includes = [
