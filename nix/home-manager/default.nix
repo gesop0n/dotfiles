@@ -4,7 +4,7 @@
     ./packages.nix
     ./aliases.nix
     ./git.nix
-    ./nixvim.nix
+    ./nixvim
     ./zsh.nix
     ./oh-my-posh.nix
     ./wezterm.nix

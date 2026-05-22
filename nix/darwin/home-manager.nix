@@ -7,6 +7,6 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = { inherit claude-code-nix system; };
-  home-manager.sharedModules = [ nixvim.homeManagerModules.nixvim ];
+  home-manager.sharedModules = [ nixvim.homeModules.nixvim ];
   home-manager.users.gesopon = import ../home-manager/default.nix;
 }
