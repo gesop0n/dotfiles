@@ -13,19 +13,14 @@
     # Git関連
     gh
 
-    # AstroNvim dependencies
-    # ----------
+    # telescope dependencies
     ripgrep
     fd
 
-    tree-sitter
-
-    # LSPs
-    # ----------
+    # nixvim LSP / formatter (CLIとしても使用)
     nixd
 
-    # Neovim plugin dependencies
-    # ----------
+    # peek.nvim runtime
     deno
 
     # Agents

@@ -23,6 +23,11 @@
     claude-code-nix = {
       url = "github:sadjow/claude-code-nix";
     };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -33,6 +38,7 @@
       home-manager,
       nix-homebrew,
       claude-code-nix,
+      nixvim,
     }:
     let
       system = "aarch64-darwin";
@@ -48,6 +54,7 @@
             home-manager
             nix-homebrew
             claude-code-nix
+            nixvim
             system
             ;
         };

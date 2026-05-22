@@ -1,3 +1,0 @@
-return {
-  'magal1337/dataform.nvim',
-}
