@@ -32,6 +32,11 @@
     # ----------
     claude-code-nix.packages.${system}.claude-code
 
+    # Google Cloud
+    # コンポーネントを追加する場合:
+    # (pkgs.google-cloud-sdk.withExtraComponents (with pkgs.google-cloud-sdk.components; [ gke-gcloud-auth-plugin bq ]))
+    google-cloud-sdk
+
     # 他ツール
     obsidian
   ];
