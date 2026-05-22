@@ -17,7 +17,7 @@
     # ----------
     ripgrep
     fd
-    lazygit
+
     tree-sitter
 
     # LSPs
