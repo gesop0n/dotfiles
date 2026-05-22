@@ -1,10 +1,7 @@
 { ... }:
 {
   programs.nixvim.plugins = {
-    telescope = {
-      enable = true;
-      extensions.fzf-native.enable = true;
-    };
+    fzf-lua.enable = true;
 
     treesitter = {
       enable = true;
@@ -14,6 +11,7 @@
       };
     };
 
+    flash.enable = true;
     which-key.enable = true;
     comment.enable = true;
     nvim-autopairs.enable = true;
