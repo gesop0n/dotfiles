@@ -8,6 +8,10 @@
           nixd.enable = true;
           lua_ls.enable = true;
           gopls.enable = true;
+          vtsls = {
+            enable = true;
+            packageFallback = true;
+          };
         };
       };
 

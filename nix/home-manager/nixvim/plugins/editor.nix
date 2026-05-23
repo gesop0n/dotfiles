@@ -8,6 +8,11 @@
       settings = {
         highlight.enable = true;
         indent.enable = true;
+        ensure_installed = [
+          "typescript"
+          "tsx"
+          "javascript"
+        ];
       };
     };
 
@@ -15,5 +20,6 @@
     which-key.enable = true;
     comment.enable = true;
     nvim-autopairs.enable = true;
+    nvim-ts-autotag.enable = true;
   };
 }
