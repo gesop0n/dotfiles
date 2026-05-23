@@ -1,4 +1,9 @@
-{ claude-code-nix, nixvim, system, ... }:
+{
+  claude-code-nix,
+  nixvim,
+  system,
+  ...
+}:
 {
   # NOTE: Unable to build flake without home.homeDirectory error
   # https://github.com/nix-community/home-manager/issues/6036

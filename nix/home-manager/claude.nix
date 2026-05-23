@@ -4,7 +4,10 @@ let
     codegraph = {
       type = "stdio";
       command = "/Users/gesopon/.local/share/mise/shims/codegraph";
-      args = [ "serve" "--mcp" ];
+      args = [
+        "serve"
+        "--mcp"
+      ];
       env = { };
     };
   };

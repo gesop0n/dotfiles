@@ -9,7 +9,14 @@
 }:
 nix-darwin.lib.darwinSystem {
   inherit system;
-  specialArgs = { inherit self system claude-code-nix nixvim; };
+  specialArgs = {
+    inherit
+      self
+      system
+      claude-code-nix
+      nixvim
+      ;
+  };
 
   modules = [
     ./system.nix
