@@ -9,6 +9,7 @@
       wrap = false;
       exrc = true;
       secure = true;
+      clipboard = "unnamedplus";
     };
 
     globals = {
