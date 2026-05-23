@@ -39,6 +39,46 @@
       cmp_luasnip.enable = true;
     };
 
+    highlight = {
+      DiagnosticError = { fg = "#f38ba8"; }; # red
+      DiagnosticWarn  = { fg = "#f9e2af"; }; # yellow
+      DiagnosticInfo  = { fg = "#89b4fa"; }; # blue
+      DiagnosticHint  = { fg = "#94e2d5"; }; # teal
+
+      DiagnosticVirtualTextError = { fg = "#f38ba8"; bg = "#302030"; };
+      DiagnosticVirtualTextWarn  = { fg = "#f9e2af"; bg = "#302a20"; };
+      DiagnosticVirtualTextInfo  = { fg = "#89b4fa"; bg = "#202035"; };
+      DiagnosticVirtualTextHint  = { fg = "#94e2d5"; bg = "#20302e"; };
+    };
+
+    extraConfigLua = ''
+      vim.diagnostic.config({
+        virtual_text = {
+          spacing = 4,
+          prefix = function(diagnostic)
+            local icons = {
+              [vim.diagnostic.severity.ERROR] = "󰅚",
+              [vim.diagnostic.severity.WARN]  = "󰀪",
+              [vim.diagnostic.severity.INFO]  = "󰋽",
+              [vim.diagnostic.severity.HINT]  = "󰌶",
+            }
+            return icons[diagnostic.severity] or "●"
+          end,
+        },
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = "󰅚",
+            [vim.diagnostic.severity.WARN]  = "󰀪",
+            [vim.diagnostic.severity.INFO]  = "󰋽",
+            [vim.diagnostic.severity.HINT]  = "󰌶",
+          },
+        },
+        underline = true,
+        update_in_insert = false,
+        severity_sort = true,
+      })
+    '';
+
     extraPackages = with pkgs; [ stylua ];
   };
 }
