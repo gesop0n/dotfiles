@@ -4,10 +4,10 @@
     enable = true;
     enableZshIntegration = true;
     globalConfig = {
-      # tools = {
-      #   node = "latest";
-      #   "npm:@dataform/cli" = "latest";
-      # };
+      tools = {
+        node = "latest";
+        "npm:@colbymchenry/codegraph" = "latest";
+      };
     };
   };
 }
