@@ -4,6 +4,8 @@
 { ... }:
 {
   system.defaults = {
+    # スペース2回でピリオドが入力される機能をオフ
+    NSGlobalDomain.NSAutomaticPeriodSubstitutionEnabled = false;
     CustomUserPreferences = {
       "org.hammerspoon.Hammerspoon" = {
         MJConfigFile = "~/.config/hammerspoon/init.lua";
