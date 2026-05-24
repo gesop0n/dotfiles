@@ -2,6 +2,8 @@
 {
   programs.nixvim.plugins.neo-tree = {
     enable = true;
+    # サイドバーの幅（デフォルトは40）
+    settings.window.width = 30;
     settings.filesystem = {
       filtered_items = {
         visible = true;
