@@ -27,6 +27,7 @@
     casks = [
       "maccy"
       "hammerspoon"
+      "karabiner-elements"
     ];
   };
 }
