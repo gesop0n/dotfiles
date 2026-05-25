@@ -13,6 +13,7 @@
     ./direnv.nix
     ./lazygit.nix
     ./claude.nix
+    ./zed.nix
   ];
 
   home.username = "gesopon";
