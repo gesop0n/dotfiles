@@ -1,4 +1,4 @@
 { ... }:
 {
-  xdg.configFile."hammerspoon/init.lua".source = ../../hammerspoon/init.lua;
+  xdg.configFile."hammerspoon/init.lua".source = ../../.config/hammerspoon/init.lua;
 }
