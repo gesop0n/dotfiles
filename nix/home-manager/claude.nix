@@ -10,6 +10,15 @@ let
       ];
       env = { };
     };
+    context7 = {
+      type = "stdio";
+      command = "npx";
+      args = [
+        "-y"
+        "@upstash/context7-mcp"
+      ];
+      env = {};
+    };
   };
 
   managedPlugins = {
