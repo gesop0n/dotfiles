@@ -65,7 +65,6 @@
       "max_severity": null,
     },
   },
-
   "lsp": {
     "codebook": {
       "initialization_options": {
@@ -73,5 +72,14 @@
       },
     },
   },
-  "load_direnv": "shell_hook"
+  "load_direnv": "shell_hook",
+  "context_servers": {
+    "codegraph": {
+      "command": {
+        "path": "/Users/gesopon/.local/share/mise/installs/npm-colbymchenry-codegraph/latest/bin/codegraph",
+        "args": ["serve", "--mcp"]
+      }
+    }
+  }
 }
+
