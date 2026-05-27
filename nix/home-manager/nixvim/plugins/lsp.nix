@@ -44,15 +44,35 @@
     };
 
     highlight = {
-      DiagnosticError = { fg = "#f38ba8"; }; # red
-      DiagnosticWarn  = { fg = "#f9e2af"; }; # yellow
-      DiagnosticInfo  = { fg = "#89b4fa"; }; # blue
-      DiagnosticHint  = { fg = "#94e2d5"; }; # teal
+      DiagnosticError = {
+        fg = "#f38ba8";
+      }; # red
+      DiagnosticWarn = {
+        fg = "#f9e2af";
+      }; # yellow
+      DiagnosticInfo = {
+        fg = "#89b4fa";
+      }; # blue
+      DiagnosticHint = {
+        fg = "#94e2d5";
+      }; # teal
 
-      DiagnosticVirtualTextError = { fg = "#f38ba8"; bg = "#302030"; };
-      DiagnosticVirtualTextWarn  = { fg = "#f9e2af"; bg = "#302a20"; };
-      DiagnosticVirtualTextInfo  = { fg = "#89b4fa"; bg = "#202035"; };
-      DiagnosticVirtualTextHint  = { fg = "#94e2d5"; bg = "#20302e"; };
+      DiagnosticVirtualTextError = {
+        fg = "#f38ba8";
+        bg = "#302030";
+      };
+      DiagnosticVirtualTextWarn = {
+        fg = "#f9e2af";
+        bg = "#302a20";
+      };
+      DiagnosticVirtualTextInfo = {
+        fg = "#89b4fa";
+        bg = "#202035";
+      };
+      DiagnosticVirtualTextHint = {
+        fg = "#94e2d5";
+        bg = "#20302e";
+      };
     };
 
     extraConfigLua = ''

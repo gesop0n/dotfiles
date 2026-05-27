@@ -79,7 +79,12 @@ in
       local SETTINGS_FILE="$1"
       [ -L "$SETTINGS_FILE" ] && rm "$SETTINGS_FILE"
       if [ ! -f "$SETTINGS_FILE" ]; then
-        printf '%s\n' '${builtins.toJSON { mcpServers = managedMcpServers; permissions = initialSettings.permissions; }}' > "$SETTINGS_FILE"
+        printf '%s\n' '${
+          builtins.toJSON {
+            mcpServers = managedMcpServers;
+            permissions = initialSettings.permissions;
+          }
+        }' > "$SETTINGS_FILE"
       else
         ${pkgs.jq}/bin/jq \
           --argjson mcp '${builtins.toJSON managedMcpServers}' \
