@@ -72,4 +72,26 @@ in
         && mv "$CLAUDE_JSON.tmp" "$CLAUDE_JSON"
     fi
   '';
+
+  # アカウント別設定ディレクトリにも MCP サーバーを反映する
+  home.activation.claudeAccountSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    _apply_mcp() {
+      local SETTINGS_FILE="$1"
+      [ -L "$SETTINGS_FILE" ] && rm "$SETTINGS_FILE"
+      if [ ! -f "$SETTINGS_FILE" ]; then
+        printf '%s\n' '${builtins.toJSON { mcpServers = managedMcpServers; permissions = initialSettings.permissions; }}' > "$SETTINGS_FILE"
+      else
+        ${pkgs.jq}/bin/jq \
+          --argjson mcp '${builtins.toJSON managedMcpServers}' \
+          --argjson perms '${builtins.toJSON initialSettings.permissions}' \
+          '.mcpServers = ((.mcpServers // {}) + $mcp) | .permissions = ((.permissions // {}) + $perms)' \
+          "$SETTINGS_FILE" > "$SETTINGS_FILE.tmp" \
+          && mv "$SETTINGS_FILE.tmp" "$SETTINGS_FILE"
+      fi
+    }
+
+    for ACCOUNT_DIR in "$HOME/.claude-config/gesop0n" "$HOME/.claude-config/KotaIshikuro"; do
+      [ -d "$ACCOUNT_DIR" ] && _apply_mcp "$ACCOUNT_DIR/settings.json"
+    done
+  '';
 }
