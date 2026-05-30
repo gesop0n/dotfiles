@@ -16,7 +16,7 @@ let
       FAST=true deno run --allow-run --allow-net --allow-read --allow-write --allow-env --no-check scripts/build.js
     '';
     installPhase = "cp -r . $out";
-    outputHash = "sha256-76CqBF09Ai8tEgRr0JxOdYAz2BtXmdzHhe888cazTug=";
+    outputHash = "sha256-N2KB9BKbVbq31iRbc56xutdUIeZOk+ufdmj7b8WrSLs=";
     outputHashAlgo = "sha256";
     outputHashMode = "recursive";
   };
