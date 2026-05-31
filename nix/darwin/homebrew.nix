@@ -28,6 +28,7 @@
       "maccy"
       "hammerspoon"
       "karabiner-elements"
+      "docker"
     ];
   };
 }
