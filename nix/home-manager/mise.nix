@@ -7,6 +7,7 @@
       tools = {
         node = "latest";
         "npm:@colbymchenry/codegraph" = "latest";
+        "npm:vercel" = "latest";
       };
     };
   };
