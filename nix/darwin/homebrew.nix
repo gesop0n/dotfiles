@@ -28,7 +28,7 @@
       "maccy"
       "hammerspoon"
       "karabiner-elements"
-      "docker"
+      "docker-desktop"
     ];
   };
 }
