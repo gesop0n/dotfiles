@@ -29,6 +29,7 @@
       "hammerspoon"
       "karabiner-elements"
       "docker-desktop"
+      "processing"
     ];
   };
 }
