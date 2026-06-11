@@ -1,33 +1,7 @@
 { pkgs, ... }:
-let
-  # peek.nvim は deno でビルドが必要なため fixed-output derivation で対応
-  peekBuilt = pkgs.stdenvNoCC.mkDerivation {
-    name = "peek-nvim-built";
-    src = pkgs.fetchFromGitHub {
-      owner = "toppair";
-      repo = "peek.nvim";
-      rev = "5820d937d5414baea5f586dc2a3d912a74636e5b";
-      hash = "sha256-hGIPxHwTSXTHFJ3JiVATMjEmoFhZ87fWElj1AMPMbQU=";
-    };
-    nativeBuildInputs = [ pkgs.deno ];
-    buildPhase = ''
-      export HOME=$TMPDIR
-      export DENO_DIR=$TMPDIR/deno-cache
-      FAST=true deno run --allow-run --allow-net --allow-read --allow-write --allow-env --no-check scripts/build.js
-    '';
-    installPhase = "cp -r . $out";
-    outputHash = "sha256-N2KB9BKbVbq31iRbc56xutdUIeZOk+ufdmj7b8WrSLs=";
-    outputHashAlgo = "sha256";
-    outputHashMode = "recursive";
-  };
-in
 {
   programs.nixvim = {
     extraPlugins = [
-      (pkgs.vimUtils.buildVimPlugin {
-        name = "peek-nvim";
-        src = peekBuilt;
-      })
       (pkgs.vimUtils.buildVimPlugin {
         name = "dataform-nvim";
         src = pkgs.fetchFromGitHub {
@@ -47,9 +21,5 @@ in
         };
       })
     ];
-
-    extraConfigLua = ''
-      require("peek").setup({ app = "browser" })
-    '';
   };
 }

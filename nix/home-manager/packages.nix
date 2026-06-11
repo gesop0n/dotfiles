@@ -20,9 +20,6 @@
     # nixvim LSP / formatter (CLIとしても使用)
     nixd
 
-    # peek.nvim runtime
-    deno
-
     # Agents
     # ----------
     claude-code-nix.packages.${system}.claude-code

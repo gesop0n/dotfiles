@@ -90,20 +90,6 @@
       options.desc = "Close buffer";
     }
 
-    # NOTE: peek.nvim — Markdownのブラウザプレビュー
-    {
-      mode = "n";
-      key = "<Leader>mp";
-      action.__raw = "function() require('peek').open() end";
-      options.desc = "Markdown Preview Open";
-    }
-    {
-      mode = "n";
-      key = "<Leader>mc";
-      action.__raw = "function() require('peek').close() end";
-      options.desc = "Markdown Preview Close";
-    }
-
     # NOTE: lazygit をフローティングターミナルで開く
     {
       mode = "n";
