@@ -20,6 +20,6 @@
     which-key.enable = true;
     comment.enable = true;
     nvim-autopairs.enable = true;
-    nvim-ts-autotag.enable = true;
+    ts-autotag.enable = true;
   };
 }
