@@ -101,6 +101,25 @@
         update_in_insert = false,
         severity_sort = true,
       })
+
+      -- LSP format on save (Go は import 整理も実行)
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        callback = function(args)
+          if vim.bo[args.buf].filetype == "go" then
+            for _, client in ipairs(vim.lsp.get_clients({ bufnr = args.buf, name = "gopls" })) do
+              local params = vim.lsp.util.make_range_params(0, client.offset_encoding)
+              params.context = { only = { "source.organizeImports" } }
+              local res = client:request_sync("textDocument/codeAction", params, 3000, args.buf)
+              for _, r in pairs((res or {}).result or {}) do
+                if r.edit then
+                  vim.lsp.util.apply_workspace_edit(r.edit, client.offset_encoding)
+                end
+              end
+            end
+          end
+          vim.lsp.buf.format({ bufnr = args.buf })
+        end,
+      })
     '';
 
     extraPackages = with pkgs; [ stylua ];
