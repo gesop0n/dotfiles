@@ -6,30 +6,23 @@
 }:
 {
   home.packages = with pkgs; [
-    # Commands
-    # ----------
+    # CLI Tools
     eza
-
-    # Git関連
-    gh
-
-    # telescope dependencies
     ripgrep
-    fd
+    fd 
 
-    # nixvim LSP / formatter (CLIとしても使用)
+    # Development Tools
+    gh 
     nixd
 
-    # Agents
-    # ----------
+    # AI Agents
     claude-code-nix.packages.${system}.claude-code
 
-    # Google Cloud
-    # コンポーネントを追加する場合:
+    # Cloud / Network
+    # google-cloud-sdk: コンポーネントを追加する場合は以下のように記述する
     # (pkgs.google-cloud-sdk.withExtraComponents (with pkgs.google-cloud-sdk.components; [ gke-gcloud-auth-plugin bq ]))
     google-cloud-sdk
+    ngrok # ローカルサーバーの外部公開トンネル
 
-    # 他ツール
-    obsidian
   ];
 }
