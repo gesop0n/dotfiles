@@ -23,6 +23,7 @@ let
 
   managedPlugins = {
     "gopls-lsp@claude-plugins-official" = true;
+    "rust-analyzer-lsp@claude-plugins-official" = true;
   };
 
   initialSettings = {
@@ -40,6 +41,10 @@ let
         "mcp__codegraph__codegraph_status"
         "mcp__codegraph__codegraph_files"
         "mcp__codegraph__codegraph_explore"
+        "Bash(rtk:*)"
+        "mcp__headroom__headroom_compress"
+        "mcp__headroom__headroom_retrieve"
+        "mcp__headroom__headroom_stats"
       ];
     };
   };
