@@ -4,6 +4,7 @@
   home-manager,
   nix-homebrew,
   claude-code-nix,
+  codex-cli-nix,
   nixvim,
   system,
 }:
@@ -14,6 +15,7 @@ nix-darwin.lib.darwinSystem {
       self
       system
       claude-code-nix
+      codex-cli-nix
       nixvim
       ;
   };

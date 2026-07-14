@@ -1,6 +1,7 @@
 {
   pkgs,
   claude-code-nix,
+  codex-cli-nix,
   system,
   ...
 }:
@@ -18,6 +19,7 @@
 
     # AI Agents
     claude-code-nix.packages.${system}.claude-code
+    codex-cli-nix.packages.${system}.codex # OpenAI Codex CLI (native Rust, 毎時自動更新)
 
     # Cloud / Network
     # google-cloud-sdk: コンポーネントを追加する場合は以下のように記述する

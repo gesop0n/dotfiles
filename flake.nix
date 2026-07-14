@@ -24,6 +24,10 @@
       url = "github:sadjow/claude-code-nix";
     };
 
+    codex-cli-nix = {
+      url = "github:sadjow/codex-cli-nix";
+    };
+
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,6 +42,7 @@
       home-manager,
       nix-homebrew,
       claude-code-nix,
+      codex-cli-nix,
       nixvim,
     }:
     let
@@ -54,6 +59,7 @@
             home-manager
             nix-homebrew
             claude-code-nix
+            codex-cli-nix
             nixvim
             system
             ;
