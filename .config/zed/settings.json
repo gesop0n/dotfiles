@@ -17,6 +17,7 @@
     "dark": "Material Icon Theme",
   },
   "git_panel": {
+    "group_by": "none",
     "show_count_badge": true,
     "file_icons": true,
     "tree_view": true,
@@ -65,20 +66,5 @@
       "max_severity": null,
     },
   },
-  "lsp": {
-    "codebook": {
-      "initialization_options": {
-        "diagnosticSeverity": "warning",
-      },
-    },
-  },
   "load_direnv": "shell_hook",
-  "context_servers": {
-    "codegraph": {
-      "command": {
-        "path": "/Users/gesopon/.local/share/mise/installs/npm-colbymchenry-codegraph/latest/bin/codegraph",
-        "args": ["serve", "--mcp"]
-      }
-    }
-  }
 }
