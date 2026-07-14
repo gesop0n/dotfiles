@@ -3,4 +3,7 @@
 # Mac OS
 .DS_Store
 
+# Agent Tools
 .serena/
+.tokensave/
+.codegraph
