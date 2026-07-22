@@ -17,7 +17,7 @@ let
         "-y"
         "@upstash/context7-mcp"
       ];
-      env = {};
+      env = { };
     };
   };
 
@@ -58,18 +58,21 @@ in
   # nixストアへのシンボリックリンク（home.file）で配ってよい。
   # CLAUDE_CONFIG_DIR 未設定時(~/.claude)と各アカウント dir の両方に同じスキルを配る。
   # recursive = true で各ファイルを個別にリンクし、手動追加スキルとも共存できるようにする。
-  home.file = builtins.listToAttrs (map
-    (root: {
-      name = "${root}/skills";
-      value = {
-        source = ../../.config/claude/skills;
-        recursive = true;
-      };
-    }) [
-      ".claude"
-      ".claude-config/gesop0n"
-      ".claude-config/KotaIshikuro"
-    ]);
+  home.file = builtins.listToAttrs (
+    map
+      (root: {
+        name = "${root}/skills";
+        value = {
+          source = ../../.config/claude/skills;
+          recursive = true;
+        };
+      })
+      [
+        ".claude"
+        ".claude-config/gesop0n"
+        ".claude-config/KotaIshikuro"
+      ]
+  );
 
   # settings.json / .claude.json で home.file ではなく home.activation を使う理由:
   # home.file は nixストアへのシンボリックリンクを作成する（読み取り専用）。

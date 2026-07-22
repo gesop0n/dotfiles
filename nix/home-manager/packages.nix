@@ -10,11 +10,11 @@
     # CLI Tools
     eza
     ripgrep
-    fd 
+    fd
     rtk
 
     # Development Tools
-    gh 
+    gh
     nixd
 
     # AI Agents
