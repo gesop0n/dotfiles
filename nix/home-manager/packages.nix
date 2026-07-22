@@ -26,6 +26,7 @@
     # (pkgs.google-cloud-sdk.withExtraComponents (with pkgs.google-cloud-sdk.components; [ gke-gcloud-auth-plugin bq ]))
     google-cloud-sdk
     ngrok # ローカルサーバーの外部公開トンネル
+    firebase-tools
 
   ];
 }
