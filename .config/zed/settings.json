@@ -1,9 +1,6 @@
 {
   "agent_servers": {
-    "claude-acp": {
-      "type": "registry",
     },
-  },
   "show_edit_predictions": false,
   "cli_default_open_behavior": "new_window",
   "ui_font_family": "MesloLGL Nerd Font",
@@ -17,7 +14,7 @@
     "dark": "Material Icon Theme",
   },
   "git_panel": {
-    "group_by": "none",
+    "group_by": "staging",
     "show_count_badge": true,
     "file_icons": true,
     "tree_view": true,
