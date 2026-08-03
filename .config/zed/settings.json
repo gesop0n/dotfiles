@@ -28,6 +28,8 @@
     "model_parameters": [],
   },
   "project_panel": {
+    "git_status_indicator": false,
+    "indent_size": 20.0,
     "file_icons": true,
     "entry_spacing": "comfortable",
     "default_width": 240.0,
