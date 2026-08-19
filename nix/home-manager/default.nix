@@ -9,7 +9,6 @@
     ./oh-my-posh.nix
     ./wezterm.nix
     ./mise.nix
-    ./uv.nix
     ./hammerspoon.nix
     ./direnv.nix
     ./lazygit.nix

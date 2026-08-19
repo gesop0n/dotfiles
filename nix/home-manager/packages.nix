@@ -11,7 +11,6 @@
     eza
     ripgrep
     fd
-    rtk
 
     # Development Tools
     gh
