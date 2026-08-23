@@ -9,7 +9,7 @@
     "font_family": "MesloLGL Nerd Font",
   },
   "icon_theme": {
-    "mode": "light",
+    "mode": "dark",
     "light": "Material Icon Theme",
     "dark": "Material Icon Theme",
   },
@@ -66,4 +66,10 @@
     },
   },
   "load_direnv": "shell_hook",
+  "theme_overrides": {
+    "VSCode Dark Modern": {
+      "border": "#565c64",
+    }
+  },
+  // "markdown_preview_theme": "VSCode Dark Modern"
 }
