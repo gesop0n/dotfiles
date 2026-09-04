@@ -22,7 +22,13 @@
   homebrew = {
     enable = true;
 
-    brews = [ ];
+    taps = [
+      "coderabbitai/tap"
+    ];
+
+    brews = [
+      "git-gtr"
+    ];
 
     casks = [
       "maccy"
