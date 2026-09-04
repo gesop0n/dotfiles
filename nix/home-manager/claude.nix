@@ -91,8 +91,13 @@ in
     fi
   '';
 
-  # アカウント別設定ディレクトリに permissions と MCP サーバーを反映する
-  # user-scope MCP は ~/.claude-config/<account>/.claude.json の mcpServers キーに保存される
+  # permissions と MCP サーバーを各設定ディレクトリに反映する。
+  # user-scope MCP は設定ディレクトリごとの .claude.json の mcpServers キーに保存される。
+  #
+  # settings.json はアカウント dir のみを対象にする（デフォルトの
+  # ~/.claude/settings.json は上の claudeSettings が担当）。
+  # 一方 MCP は CLAUDE_CONFIG_DIR 未設定時に ~/.claude.json が読まれるため、
+  # デフォルト($HOME)とアカウント dir の両方へ配る必要がある。
   home.activation.claudeAccountSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     _apply_account_settings() {
       local SETTINGS_FILE="$1"
@@ -124,8 +129,15 @@ in
     }
 
     for ACCOUNT_DIR in "$HOME/.claude-config/gesop0n" "$HOME/.claude-config/KotaIshikuro"; do
-      [ -d "$ACCOUNT_DIR" ] && _apply_account_settings "$ACCOUNT_DIR/settings.json"
-      [ -d "$ACCOUNT_DIR" ] && _apply_account_mcp "$ACCOUNT_DIR/.claude.json"
+      if [ -d "$ACCOUNT_DIR" ]; then
+        _apply_account_settings "$ACCOUNT_DIR/settings.json"
+      fi
+    done
+
+    for CONFIG_ROOT in "$HOME" "$HOME/.claude-config/gesop0n" "$HOME/.claude-config/KotaIshikuro"; do
+      if [ -d "$CONFIG_ROOT" ]; then
+        _apply_account_mcp "$CONFIG_ROOT/.claude.json"
+      fi
     done
   '';
 }
