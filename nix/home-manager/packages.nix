@@ -25,7 +25,7 @@
     # (pkgs.google-cloud-sdk.withExtraComponents (with pkgs.google-cloud-sdk.components; [ gke-gcloud-auth-plugin bq ]))
     google-cloud-sdk
     google-cloud-sql-proxy # Cloud SQL への接続 (バイナリ名は cloud-sql-proxy)
-    postgresql_17          # psql クライアント
+    postgresql_17 # psql クライアント
     ngrok # ローカルサーバーの外部公開トンネル
     firebase-tools
 
