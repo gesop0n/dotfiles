@@ -27,7 +27,10 @@
     ];
 
     brews = [
-      "git-gtr"
+      {
+        name = "coderabbitai/tap/git-gtr";
+        trusted = true;
+      }
     ];
 
     casks = [
