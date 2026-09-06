@@ -11,9 +11,9 @@
         showIcons = true;
       };
       git = {
-        pagers = [
+        diffRenderers = [
           {
-            pager = "delta --dark --paging=never --line-numbers --syntax-theme='Visual Studio Dark+'";
+            command = "delta --dark --paging=never --line-numbers --syntax-theme='Visual Studio Dark+'";
           }
         ];
       };
