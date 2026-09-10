@@ -15,6 +15,7 @@
     # Development Tools
     gh
     nixd
+    d2
 
     # AI Agents
     claude-code-nix.packages.${system}.claude-code
