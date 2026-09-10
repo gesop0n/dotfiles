@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# git のフック全体をこのスクリプトに集約する（core.hooksPath から呼ばれる）。
+#
+# core.hooksPath をグローバルに設定すると git はそのディレクトリしか見なくなり、
+# リポジトリ側の .git/hooks が一切動かなくなる。そのため各フック名からこの
+# スクリプトへシンボリックリンクを張り、最後にリポジトリ固有のフックへ処理を
+# 引き継ぐ構成にしている。
+#
+# フック名は $0 のベース名から取る（git は hooksPath/<フック名> を実行する）。
+set -euo pipefail
+
+hook_name="$(basename "$0")"
+
+# AI エージェントが勝手に付ける co-author trailer を落とす。
+# Claude Code は設定で止められるが、Codex はプロンプト注入で付けるため
+# 設定では止まらない。ここで機械的に取り除く。
+# 対象を増やすときは下の正規表現にメールアドレスを足す。
+AGENT_COAUTHOR_EMAILS='noreply@anthropic\.com|noreply@openai\.com'
+
+if [ "$hook_name" = "commit-msg" ] && [ -f "${1:-}" ]; then
+  msg_file="$1"
+  tmp_file="$(mktemp)"
+  awk -v pat="^[ \t]*co-authored-by:.*<($AGENT_COAUTHOR_EMAILS)>[ \t]*$" '
+    tolower($0) ~ pat { next }
+    { print }
+  ' "$msg_file" >"$tmp_file"
+  cat "$tmp_file" >"$msg_file"
+  rm -f "$tmp_file"
+fi
+
+# リポジトリ固有のフックがあれば引き継ぐ。
+# core.hooksPath を見てしまう git rev-parse --git-path ではなく --git-dir を使う。
+if git_dir="$(git rev-parse --git-dir 2>/dev/null)"; then
+  repo_hook="$git_dir/hooks/$hook_name"
+  if [ -x "$repo_hook" ]; then
+    exec "$repo_hook" "$@"
+  fi
+fi
+
+exit 0

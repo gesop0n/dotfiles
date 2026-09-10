@@ -26,7 +26,14 @@ let
     "rust-analyzer-lsp@claude-plugins-official" = true;
   };
 
-  initialSettings = {
+  # 既存の settings.json にも常に上書きで反映させたい設定。
+  # includeCoAuthoredBy = false でコミットの Co-Authored-By trailer と
+  # PR 本文の "Generated with Claude Code" フッターの両方が付かなくなる。
+  managedSettings = {
+    includeCoAuthoredBy = false;
+  };
+
+  initialSettings = managedSettings // {
     effortLevel = "high";
     theme = "dark";
     enabledPlugins = managedPlugins;
@@ -84,7 +91,7 @@ in
     if [ ! -f "$SETTINGS_FILE" ]; then
       printf '%s\n' '${builtins.toJSON initialSettings}' > "$SETTINGS_FILE"
     else
-      ${pkgs.jq}/bin/jq '. * {
+      ${pkgs.jq}/bin/jq '. * ${builtins.toJSON managedSettings} * {
         "enabledPlugins": ((.enabledPlugins // {}) + ${builtins.toJSON managedPlugins})
       }' "$SETTINGS_FILE" > "$SETTINGS_FILE.tmp" \
         && mv "$SETTINGS_FILE.tmp" "$SETTINGS_FILE"
@@ -104,14 +111,14 @@ in
       [ -L "$SETTINGS_FILE" ] && rm "$SETTINGS_FILE"
       if [ ! -f "$SETTINGS_FILE" ]; then
         printf '%s\n' '${
-          builtins.toJSON {
-            permissions = initialSettings.permissions;
-          }
+          builtins.toJSON (
+            managedSettings // { permissions = initialSettings.permissions; }
+          )
         }' > "$SETTINGS_FILE"
       else
         ${pkgs.jq}/bin/jq \
           --argjson perms '${builtins.toJSON initialSettings.permissions}' \
-          '.permissions = ((.permissions // {}) + $perms)' \
+          '(.permissions = ((.permissions // {}) + $perms)) * ${builtins.toJSON managedSettings}' \
           "$SETTINGS_FILE" > "$SETTINGS_FILE.tmp" \
           && mv "$SETTINGS_FILE.tmp" "$SETTINGS_FILE"
       fi
