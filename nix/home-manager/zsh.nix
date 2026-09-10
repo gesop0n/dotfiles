@@ -13,8 +13,15 @@
 
     initContent = ''
       atcd() {
+        local atcli_target="today"
         local atcli_dir
-        atcli_dir="$(command atcli path today "$@")" || return
+        case "$1" in
+          root | today)
+            atcli_target="$1"
+            shift
+            ;;
+        esac
+        atcli_dir="$(command atcli path "$atcli_target" "$@")" || return
         builtin cd "$atcli_dir"
       }
     '';
