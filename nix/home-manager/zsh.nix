@@ -11,6 +11,14 @@
       eval "$(/opt/homebrew/bin/brew shellenv)"
     '';
 
+    initContent = ''
+      atcd() {
+        local atcli_dir
+        atcli_dir="$(command atcli path today "$@")" || return
+        builtin cd "$atcli_dir"
+      }
+    '';
+
     # Syntax highlighting
     # https://mynixos.com/nixpkgs/options/programs.zsh.syntaxHighlighting
     syntaxHighlighting = {
