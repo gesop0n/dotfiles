@@ -15,7 +15,7 @@ hook_name="$(basename "$0")"
 # Claude Code は設定で止められるが、Codex はプロンプト注入で付けるため
 # 設定では止まらない。ここで機械的に取り除く。
 # 対象を増やすときは下の正規表現にメールアドレスを足す。
-AGENT_COAUTHOR_EMAILS='noreply@anthropic\.com|noreply@openai\.com'
+AGENT_COAUTHOR_EMAILS='noreply@anthropic[.]com|noreply@openai[.]com'
 
 if [ "$hook_name" = "commit-msg" ] && [ -f "${1:-}" ]; then
   msg_file="$1"
