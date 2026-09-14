@@ -15,6 +15,7 @@
     ./claude.nix
     ./zed.nix
     ./herdr.nix
+    ./gtr.nix
     ./nh.nix
   ];
 

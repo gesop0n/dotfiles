@@ -11,6 +11,7 @@
     eza
     ripgrep
     fd
+    fzf # git-gtr の `gtr cd` 引数なし時のコマンドパレットに必要
 
     # Development Tools
     gh
