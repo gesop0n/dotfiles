@@ -14,6 +14,7 @@
     ./lazygit.nix
     ./claude.nix
     ./zed.nix
+    ./herdr.nix
     ./nh.nix
   ];
 
