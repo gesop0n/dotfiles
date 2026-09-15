@@ -1,4 +1,20 @@
-{ ... }:
+{
+  config,
+  lib,
+  claudeConfigDirs,
+  ...
+}:
+let
+  # skill は herdr パッケージ自身が share/herdr/skills/herdr に同梱している。
+  # npx skills add や fetchurl で別取得せず同じ derivation から引くことで、
+  # バイナリと SKILL.md のバージョンが必ず一致する。
+  skillSource = "${config.programs.herdr.package}/share/herdr/skills/herdr";
+
+  # skill の探索先。Codex は $CODEX_HOME/skills (既定 ~/.codex/skills) を読む。
+  # ~/.codex/skills/.system は Codex 自身が同梱 skill を置くので、
+  # ディレクトリごとではなく herdr サブディレクトリだけを symlink する。
+  skillDirs = map (dir: "${dir}/skills/herdr") (claudeConfigDirs ++ [ ".codex" ]);
+in
 {
   # herdr: AI エージェントの状態 (作業中 / 入力待ち / 完了) を認識する
   # ターミナルマルチプレクサ。
@@ -51,4 +67,11 @@
       };
     };
   };
+
+  # SKILL.md は Herdr pane 内 (HERDR_ENV=1) のエージェントが他 pane を
+  # 操作するための手順書。どちらのエージェントも書き換えないので
+  # home.file (nix store への symlink) でよい。
+  home.file = lib.genAttrs skillDirs (_: {
+    source = skillSource;
+  });
 }

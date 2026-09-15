@@ -39,6 +39,11 @@ let
   ];
   accountDirsSh = lib.concatMapStringsSep " " (name: "\"$HOME/.claude-config/${name}\"") accountNames;
 
+  # Claude Code の personal skill / commands は「user config dir」配下から読まれる。
+  # CLAUDE_CONFIG_DIR 未設定なら ~/.claude、アカウント切り替え時は
+  # ~/.claude-config/<account> がその config dir になる。
+  claudeConfigDirs = [ ".claude" ] ++ map (name: ".claude-config/${name}") accountNames;
+
   initialSettings = managedSettings // {
     effortLevel = "high";
     theme = "dark";
@@ -59,6 +64,9 @@ let
   };
 in
 {
+  # herdr.nix が skill の配布先として参照する。
+  _module.args.claudeConfigDirs = claudeConfigDirs;
+
   # Claude Code 2.x の設定ファイルの役割:
   # - ~/.claude/settings.json : theme, effortLevel, enabledPlugins, permissions
   # - ~/.claude.json          : user-scope MCP サーバー (mcpServers キー)
