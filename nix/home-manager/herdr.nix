@@ -10,10 +10,9 @@ let
   # バイナリと SKILL.md のバージョンが必ず一致する。
   skillSource = "${config.programs.herdr.package}/share/herdr/skills/herdr";
 
-  # skill の探索先。Codex は $CODEX_HOME/skills (既定 ~/.codex/skills) を読む。
-  # ~/.codex/skills/.system は Codex 自身が同梱 skill を置くので、
-  # ディレクトリごとではなく herdr サブディレクトリだけを symlink する。
-  skillDirs = map (dir: "${dir}/skills/herdr") (claudeConfigDirs ++ [ ".codex" ]);
+  # Codex の user skill は ~/.agents/skills から読まれる。
+  # Claude Code の各 config dir と Codex の user skill dir に配布する。
+  skillDirs = map (dir: "${dir}/skills/herdr") claudeConfigDirs ++ [ ".agents/skills/herdr" ];
 in
 {
   # herdr: AI エージェントの状態 (作業中 / 入力待ち / 完了) を認識する
