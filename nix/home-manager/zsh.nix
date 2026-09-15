@@ -11,19 +11,19 @@
       eval "$(/opt/homebrew/bin/brew shellenv)"
     '';
 
+    # atcli の shell 統合（atcd / atcli cd / atcli new --cd）。
+    # 関数の実体は atcli 側の `atcli init zsh` が出力する。
+    # atcli は direnv 経由で atcoder リポジトリ内でしか PATH に乗らないため、
+    # shell 起動時に eval はできない。初回呼び出し時に本物へ差し替える。
     initContent = ''
-      atcd() {
-        local atcli_target="today"
-        local atcli_dir
-        case "$1" in
-          root | today)
-            atcli_target="$1"
-            shift
-            ;;
-        esac
-        atcli_dir="$(command atcli path "$atcli_target" "$@")" || return
-        builtin cd "$atcli_dir"
+      _atcli_bootstrap() {
+        local _atcli_init
+        _atcli_init="$(command atcli init zsh)" || return
+        unfunction atcli atcd _atcli_bootstrap 2>/dev/null
+        eval "$_atcli_init"
       }
+      atcli() { _atcli_bootstrap || return; atcli "$@"; }
+      atcd()  { _atcli_bootstrap || return; atcd  "$@"; }
     '';
 
     # Syntax highlighting
