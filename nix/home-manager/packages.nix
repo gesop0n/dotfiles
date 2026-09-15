@@ -28,6 +28,7 @@
     google-cloud-sdk
     google-cloud-sql-proxy # Cloud SQL への接続 (バイナリ名は cloud-sql-proxy)
     postgresql_17 # psql クライアント
+    redis # redis-server / redis-cli (ローカル開発用)
     ngrok # ローカルサーバーの外部公開トンネル
     firebase-tools
 
