@@ -13,6 +13,7 @@
     ./direnv.nix
     ./lazygit.nix
     ./claude.nix
+    ./codex.nix
     ./zed.nix
     ./herdr.nix
     ./gtr.nix

@@ -1,0 +1,158 @@
+# =============================================================================
+# Codex CLI 設定ファイル  (~/.codex/config.toml)
+# -----------------------------------------------------------------------------
+# 対象バージョン : codex-cli 0.153.4   (`codex --version` で確認 / 2026-09-16 時点)
+# 実効値の確認   : `codex doctor`      (approval policy / sandbox / config を一覧表示)
+# 未知キーの検出 : `codex --strict-config`  (このバージョンが知らないキーでエラーにする)
+# 一時的な上書き : `codex -c key=value` / `codex -c a.b.c=value`
+#
+# 公式ドキュメント
+#   入口              : https://developers.openai.com/codex/local-config
+#   基本設定          : https://learn.chatgpt.com/docs/config-file/config-basic
+#   応用設定          : https://learn.chatgpt.com/docs/config-file/config-advanced
+#   全キーリファレンス: https://learn.chatgpt.com/docs/config-file/config-reference
+#   承認とサンドボックス : https://learn.chatgpt.com/docs/agent-approvals-security
+#   auto review       : https://learn.chatgpt.com/docs/sandboxing/auto-review
+#   リポジトリ        : https://github.com/openai/codex
+#
+# 管理方法 : nix/home-manager/codex.nix から ~/.codex/config.toml へ symlink。
+#
+# 注意 : codex 自身もこのファイルに追記する。マシン固有で git に載せたくないもの:
+#          [projects."<path>"].trust_level : ディレクトリを信頼したとき
+#          [tui.*]                         : TUI の操作や NUX カウンタ
+#        これらが追記されたら commit せずに捨てる:
+#          git checkout -- .config/.codex/config.toml
+# =============================================================================
+
+
+# -----------------------------------------------------------------------------
+# モデル
+# https://learn.chatgpt.com/docs/config-file/config-reference
+# -----------------------------------------------------------------------------
+model = "gpt-5.6-sol"
+
+# model_reasoning_effort : minimal | low | medium | high | xhigh
+model_reasoning_effort = "xhigh"
+
+# model_reasoning_summary : auto | concise | detailed | none
+# model_reasoning_summary = "auto"
+
+# model_verbosity : low | medium | high   (最終回答の長さ)
+# model_verbosity = "medium"
+
+# personality : none | friendly | pragmatic
+# personality = "pragmatic"
+
+
+# -----------------------------------------------------------------------------
+# 承認 (approval) — Claude Code の permission mode に相当する部分
+# https://learn.chatgpt.com/docs/agent-approvals-security
+# -----------------------------------------------------------------------------
+# approval_policy : "いつ" 承認リクエストを発生させるか
+#   "untrusted"  : 信頼済みコマンド以外は毎回確認 (いちばん厳しい)
+#   "on-failure" : サンドボックス内で失敗したときだけ確認
+#   "on-request" : モデルが必要と判断したときに確認                      ← 既定・推奨
+#   "granular"   : カテゴリ別に指定 (sandbox_approval / rules /
+#                  mcp_elicitations / request_permissions / skill_approval)
+#   "never"      : 一切確認しない (失敗はそのままモデルに返る)
+approval_policy = "on-request"
+
+# approvals_reviewer : 発生した承認リクエストを "誰が" さばくか
+#   "user"              : 自分で確認する (既定) ≒ Claude Code の Ask before edits
+#   "auto_review"       : レビュー用サブエージェントが自動で承認/拒否
+#                         ≒ Claude Code の Auto mode           ← これを使う
+#   "guardian_subagent" : Guardian サブエージェントに委譲 (実験的)
+#
+# 注意:
+#   - approval_policy = "never" とは併用不可。承認リクエスト自体が発生しないので無意味になる。
+#   - auto_review は「レビュー担当の差し替え」であって権限の付与ではない。
+#     writable_roots を広げたりネットワークを開けたりはしない。
+#   - 1 回だけ試すなら CLI フラグ `codex --approve-for-me`
+#     (= auto_review + workspace-write を一時的に有効化) が使える。
+approvals_reviewer = "auto_review"
+
+# レビュアーに渡す追加ポリシー (Markdown)。省略すると Codex 既定のポリシーになる。
+# [auto_review]
+# policy = """
+# - .env / 認証情報 / ~/.ssh の読み書きは常に拒否する。
+# - `git push` と本番環境に対する操作は常に拒否する。
+# - 依存関係のインストール (pnpm / npm / cargo / nix) と読み取り系のネットワークは許可してよい。
+# - 破壊的なコマンド (rm -rf, DROP TABLE, force push) は拒否して理由を報告する。
+# """
+
+
+# -----------------------------------------------------------------------------
+# サンドボックス (sandbox)
+# https://learn.chatgpt.com/docs/agent-approvals-security
+# -----------------------------------------------------------------------------
+# sandbox_mode : read-only | workspace-write | danger-full-access
+#   "read-only"          : 読み取りのみ。書き込みは毎回エスカレーション
+#   "workspace-write"    : cwd 配下は書き込み可、ネットワークは既定で遮断   ← 推奨
+#   "danger-full-access" : 制限なし。外側で隔離済みの環境専用
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+# ネットワークを常時開放するか。false のままなら、pnpm install や curl は
+# エスカレーション扱いになり auto_review が自動で可否を判断する (プロンプトでは止まらない)。
+# 毎回のレビューを省きたい場合だけ true にする。
+network_access = false
+
+# cwd 以外に書き込みを許可するディレクトリ
+# writable_roots = ["/path/to/extra/dir"]
+
+# exclude_slash_tmp      : /tmp を書き込み可能対象から外す
+# exclude_tmpdir_env_var : $TMPDIR を書き込み可能対象から外す
+# exclude_slash_tmp = false
+# exclude_tmpdir_env_var = false
+
+# 権限プロファイル。組み込みは :read-only / :workspace / :danger-full-access。
+# 独自プロファイルを作る場合は [permissions.<名前>] を定義してから名前で参照する。
+# default_permissions = ":workspace"
+
+
+# -----------------------------------------------------------------------------
+# ツール / web 検索
+# -----------------------------------------------------------------------------
+# web_search (トップレベル) : 検索モード disabled | cached | indexed | live
+# web_search = "live"
+
+# [tools] の web_search : 検索ツール自体の on/off (true/false か詳細指定のテーブル)
+#   CLI の `codex --search` は一時的に有効化するフラグ
+# [tools]
+# web_search = true
+
+
+# -----------------------------------------------------------------------------
+# その他
+# -----------------------------------------------------------------------------
+# file_opener : vscode | vscode-insiders | windsurf | cursor | none
+#   ファイル参照をクリック可能なリンクにする。nvim 派なので none。
+# file_opener = "none"
+
+# hide_agent_reasoning     : 推論サマリを隠す
+# show_raw_agent_reasoning : 生の推論を表示する
+# hide_agent_reasoning = false
+# show_raw_agent_reasoning = false
+
+# 起動時のアップデート確認 (nix で管理しているので切ってもよい)
+# check_for_update_on_startup = false
+
+# ターン完了時に実行する外部コマンド (JSON が引数で渡る)
+# notify = ["osascript", "-e", "display notification \"codex done\""]
+
+# AGENTS.md の読み込み上限バイト数
+# project_doc_max_bytes = 32768
+
+# 機能フラグ。一覧は `codex features list`、切り替えは `codex features enable <name>`
+# [features]
+# hooks = true
+
+# MCP サーバー。管理は `codex mcp add/list/remove`
+# [mcp_servers.context7]
+# command = "npx"
+# args = ["-y", "@upstash/context7-mcp"]
+
+# プロファイルは別ファイル方式:
+#   ~/.codex/<name>.config.toml を作って `codex -p <name>` で重ねる
+#   例) ~/.codex/safe.config.toml に approvals_reviewer = "user" を書いて `codex -p safe`
+
