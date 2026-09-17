@@ -6,6 +6,7 @@
   claude-code-nix,
   codex-cli-nix,
   nixvim,
+  ui-ux-pro-max-skill,
   system,
 }:
 nix-darwin.lib.darwinSystem {
@@ -17,6 +18,7 @@ nix-darwin.lib.darwinSystem {
       claude-code-nix
       codex-cli-nix
       nixvim
+      ui-ux-pro-max-skill
       ;
   };
 

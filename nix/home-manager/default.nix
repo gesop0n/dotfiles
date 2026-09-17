@@ -16,6 +16,7 @@
     ./codex.nix
     ./zed.nix
     ./herdr.nix
+    ./ui-ux-pro-max.nix
     ./gtr.nix
     ./nh.nix
   ];

@@ -7,3 +7,6 @@
 .serena/
 .tokensave/
 .codegraph
+
+# python の一時生成物 (codex-config-merge.py のテスト実行で出る)
+__pycache__/

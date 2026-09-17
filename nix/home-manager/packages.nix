@@ -18,6 +18,16 @@
     nixd
     d2
 
+    # Claude Code / Codex は python を同梱せず PATH の python3 を spawn する
+    # (ui-ux-pro-max のような skill 同梱スクリプトがこれを使う)。
+    # 宣言しないと Command Line Tools の /usr/bin/python3 (3.9系, EOL) に
+    # 暗黙依存するので、nix profile 側で実体を固定する。
+    python3
+    # nix の python3 には pip install できない (store が read-only)。
+    # 3rd-party 依存のあるスクリプト用の逃げ道として入れておく
+    # (uv run --with ... / PEP 723 inline metadata)。
+    uv
+
     # AI Agents
     claude-code-nix.packages.${system}.claude-code
     codex-cli-nix.packages.${system}.codex # OpenAI Codex CLI (native Rust, 毎時自動更新)

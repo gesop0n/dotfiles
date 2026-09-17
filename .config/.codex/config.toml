@@ -15,13 +15,21 @@
 #   auto review       : https://learn.chatgpt.com/docs/sandboxing/auto-review
 #   リポジトリ        : https://github.com/openai/codex
 #
-# 管理方法 : nix/home-manager/codex.nix から ~/.codex/config.toml へ symlink。
+# 管理方法 : このファイルは「ベース」であって ~/.codex/config.toml 本体ではない。
+#            nix/home-manager/codex.nix が home-rebuild のたびに
+#              ~/.codex/config.toml = このファイル(逐語) + 既存ファイルから
+#                                     引き継いだマシン固有テーブル
+#            として実ファイルを作り直す。symlink ではないので codex は自由に
+#            書き込めるが、その書き込みがこのリポジトリに漏れることはない。
 #
-# 注意 : codex 自身もこのファイルに追記する。マシン固有で git に載せたくないもの:
+# 注意 : ここを直したら home-rebuild するまで ~/.codex/config.toml には反映されない。
+#
+#        codex 自身が書くもののうち、マシン固有として引き継ぐテーブルは
+#        codex.nix の localTables で指定している:
 #          [projects."<path>"].trust_level : ディレクトリを信頼したとき
 #          [tui.*]                         : TUI の操作や NUX カウンタ
-#        これらが追記されたら commit せずに捨てる:
-#          git checkout -- .config/.codex/config.toml
+#        それ以外のキーを codex が書いた場合は、rebuild 時に警告を出して
+#        このベースの内容へ戻す。残したい設定ならこのファイルに書くこと。
 # =============================================================================
 
 
