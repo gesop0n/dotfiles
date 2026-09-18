@@ -52,6 +52,15 @@
       url = "github:nextlevelbuilder/ui-ux-pro-max-skill";
       flake = false;
     };
+
+    # 検証済み JSON IR から自己完結 HTML の構成図を生成する skill。
+    # skill 本体はリポジトリ直下ではなく archify/ サブディレクトリ。
+    # main は development channel (2.17.0-dev.1) なので stable のリリース
+    # タグを pin する。更新はこのタグを書き換える (nix flake update では動かない)。
+    archify-skill = {
+      url = "github:tt-a1i/archify/v2.16.0";
+      flake = false;
+    };
   };
 
   outputs =

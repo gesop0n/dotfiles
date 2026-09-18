@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "archify-skill": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1788088153,
+        "narHash": "sha256-0/zwilbuarvLfqH+oNgJoKtQ5cpJKD+Nz3VtOmhZB6U=",
+        "owner": "tt-a1i",
+        "repo": "archify",
+        "rev": "c826e6c3a7abad19c0f3cd1ca57207d54b1ad8de",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tt-a1i",
+        "ref": "v2.16.0",
+        "repo": "archify",
+        "type": "github"
+      }
+    },
     "brew-src": {
       "flake": false,
       "locked": {
@@ -246,6 +263,7 @@
     },
     "root": {
       "inputs": {
+        "archify-skill": "archify-skill",
         "claude-code-nix": "claude-code-nix",
         "codex-cli-nix": "codex-cli-nix",
         "grok-build-nix": "grok-build-nix",
