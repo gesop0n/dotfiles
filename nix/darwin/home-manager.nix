@@ -1,9 +1,5 @@
 {
-  claude-code-nix,
-  codex-cli-nix,
-  grok-build-nix,
-  nixvim,
-  ui-ux-pro-max-skill,
+  inputs,
   system,
   ...
 }:
@@ -17,15 +13,7 @@
   # 既存の手書きファイル（例: ~/.zprofile）を上書きする際、エラーにせず
   # <name>.backup に退避してから管理下に置く。
   home-manager.backupFileExtension = "backup";
-  home-manager.extraSpecialArgs = {
-    inherit
-      claude-code-nix
-      codex-cli-nix
-      grok-build-nix
-      ui-ux-pro-max-skill
-      system
-      ;
-  };
-  home-manager.sharedModules = [ nixvim.homeModules.nixvim ];
+  home-manager.extraSpecialArgs = { inherit inputs system; };
+  home-manager.sharedModules = [ inputs.nixvim.homeModules.nixvim ];
   home-manager.users.gesopon = import ../home-manager/default.nix;
 }

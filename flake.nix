@@ -1,6 +1,13 @@
 {
   description = "My nix-darwin system flake";
 
+  # NOTE: inputs は Nix がロック解決のために「評価せずに静的な attrset として」
+  # 読むため、import や関数適用で別ファイルへ切り出すことはできない
+  # (`expected a set but got a thunk` になる)。URL の列挙はここに集約する。
+  #
+  # 一方で input を各モジュールへ渡す配線は outputs 以下で inputs を丸ごと
+  # 引き回しており、input 追加時に触るのはこの inputs ブロックと
+  # 実際に使うモジュールの2箇所だけで済む。
   inputs = {
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -48,18 +55,7 @@
   };
 
   outputs =
-    {
-      self,
-      nix-darwin,
-      nixpkgs,
-      home-manager,
-      nix-homebrew,
-      claude-code-nix,
-      codex-cli-nix,
-      grok-build-nix,
-      nixvim,
-      ui-ux-pro-max-skill,
-    }:
+    inputs@{ nixpkgs, ... }:
     let
       system = "aarch64-darwin";
     in
@@ -68,18 +64,7 @@
 
       darwinConfigurations = {
         "Kotas-MacBook-Pro" = import ./nix/darwin/default.nix {
-          inherit
-            self
-            nix-darwin
-            home-manager
-            nix-homebrew
-            claude-code-nix
-            codex-cli-nix
-            grok-build-nix
-            nixvim
-            ui-ux-pro-max-skill
-            system
-            ;
+          inherit inputs system;
         };
       };
     };

@@ -1,5 +1,5 @@
 {
-  self,
+  inputs,
   system,
   ...
 }:
@@ -14,7 +14,7 @@
     "codex-cli.cachix.org-1:1Br3H1hHoRYG22n//cGKJOk3cQXgYobUel6O8DgSing="
   ];
 
-  system.configurationRevision = self.rev or self.dirtyRev or null;
+  system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
   system.stateVersion = 6;
 
   nixpkgs.hostPlatform = system;

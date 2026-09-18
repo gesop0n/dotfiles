@@ -1,6 +1,6 @@
 {
   lib,
-  ui-ux-pro-max-skill,
+  inputs,
   claudeConfigDirs,
   ...
 }:
@@ -8,7 +8,7 @@ let
   # upstream は skill 本体を .claude/skills/ui-ux-pro-max にのみ持つ
   # (.agents/ はリポジトリには無く、公式 CLI が配布時に生成する側のレイアウト)。
   # SKILL.md のほかに data/ references/ scripts/ を含むのでディレクトリごと配る。
-  skillSource = "${ui-ux-pro-max-skill}/.claude/skills/ui-ux-pro-max";
+  skillSource = "${inputs.ui-ux-pro-max-skill}/.claude/skills/ui-ux-pro-max";
 
   # herdr.nix と同じ配布先: Claude Code の各 config dir と Codex の user skill dir。
   skillDirs = map (dir: "${dir}/skills/ui-ux-pro-max") claudeConfigDirs ++ [

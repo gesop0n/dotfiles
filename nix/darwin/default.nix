@@ -1,38 +1,20 @@
-{
-  self,
-  nix-darwin,
-  home-manager,
-  nix-homebrew,
-  claude-code-nix,
-  codex-cli-nix,
-  grok-build-nix,
-  nixvim,
-  ui-ux-pro-max-skill,
-  system,
-}:
-nix-darwin.lib.darwinSystem {
+# flake.nix から inputs を丸ごと受け取り、以降は specialArgs /
+# extraSpecialArgs で各モジュールへ素通しする。
+# input を1つ増やしても、この受け渡しの記述は変更不要。
+{ inputs, system }:
+inputs.nix-darwin.lib.darwinSystem {
   inherit system;
-  specialArgs = {
-    inherit
-      self
-      system
-      claude-code-nix
-      codex-cli-nix
-      grok-build-nix
-      nixvim
-      ui-ux-pro-max-skill
-      ;
-  };
+  specialArgs = { inherit inputs system; };
 
   modules = [
     ./system.nix
     ./packages.nix
     ./defaults.nix
 
-    home-manager.darwinModules.home-manager
+    inputs.home-manager.darwinModules.home-manager
     ./home-manager.nix
 
-    nix-homebrew.darwinModules.nix-homebrew
+    inputs.nix-homebrew.darwinModules.nix-homebrew
     ./homebrew.nix
   ];
 }

@@ -1,8 +1,6 @@
 {
   pkgs,
-  claude-code-nix,
-  codex-cli-nix,
-  grok-build-nix,
+  inputs,
   system,
   ...
 }:
@@ -30,9 +28,9 @@
     uv
 
     # AI Agents
-    claude-code-nix.packages.${system}.claude-code
-    codex-cli-nix.packages.${system}.codex # OpenAI Codex CLI (native Rust, 毎時自動更新)
-    grok-build-nix.packages.${system}.grok # xAI Grok Build (公式リリースバイナリを pin, 毎時自動更新)
+    inputs.claude-code-nix.packages.${system}.claude-code
+    inputs.codex-cli-nix.packages.${system}.codex # OpenAI Codex CLI (native Rust, 毎時自動更新)
+    inputs.grok-build-nix.packages.${system}.grok # xAI Grok Build (公式リリースバイナリを pin, 毎時自動更新)
 
     # Cloud / Network
     # google-cloud-sdk: コンポーネントを追加する場合は以下のように記述する
