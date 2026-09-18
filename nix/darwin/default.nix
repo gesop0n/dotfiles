@@ -5,6 +5,7 @@
   nix-homebrew,
   claude-code-nix,
   codex-cli-nix,
+  grok-build-nix,
   nixvim,
   ui-ux-pro-max-skill,
   system,
@@ -17,6 +18,7 @@ nix-darwin.lib.darwinSystem {
       system
       claude-code-nix
       codex-cli-nix
+      grok-build-nix
       nixvim
       ui-ux-pro-max-skill
       ;

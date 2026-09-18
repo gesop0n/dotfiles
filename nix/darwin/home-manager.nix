@@ -1,6 +1,7 @@
 {
   claude-code-nix,
   codex-cli-nix,
+  grok-build-nix,
   nixvim,
   ui-ux-pro-max-skill,
   system,
@@ -20,6 +21,7 @@
     inherit
       claude-code-nix
       codex-cli-nix
+      grok-build-nix
       ui-ux-pro-max-skill
       system
       ;

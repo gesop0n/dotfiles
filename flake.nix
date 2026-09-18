@@ -28,6 +28,11 @@
       url = "github:sadjow/codex-cli-nix";
     };
 
+    grok-build-nix = {
+      url = "github:gesop0n/grok-build-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,6 +56,7 @@
       nix-homebrew,
       claude-code-nix,
       codex-cli-nix,
+      grok-build-nix,
       nixvim,
       ui-ux-pro-max-skill,
     }:
@@ -69,6 +75,7 @@
             nix-homebrew
             claude-code-nix
             codex-cli-nix
+            grok-build-nix
             nixvim
             ui-ux-pro-max-skill
             system
