@@ -16,7 +16,7 @@ let
 
   # ホーム側の実ファイルと区別するため、リポジトリ側は「ベース」として扱う。
   # 置き場所は ~/.codex をそのままミラーした .config/.codex のまま。
-  baseConfig = ../../.config/.codex/config.toml;
+  baseConfig = ../../../.config/.codex/config.toml;
 in
 {
   # Codex CLI (codex-cli) の設定。
@@ -47,7 +47,7 @@ in
 
     # 既存ファイルが壊れていると再生成を中止する。無関係な rebuild まで
     # 巻き込んで失敗させたくないので、メッセージだけ出して先へ進む。
-    ${pkgs.python3}/bin/python3 ${./codex-config-merge.py} \
+    ${pkgs.python3}/bin/python3 ${./config-merge.py} \
       ${baseConfig} "$CODEX_CONFIG" \
       --local ${lib.concatStringsSep "," localTables} \
       || echo "codex: ~/.codex/config.toml の再生成に失敗した (上のメッセージを参照)"

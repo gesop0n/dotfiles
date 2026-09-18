@@ -13,7 +13,7 @@
     ./direnv.nix
     ./lazygit.nix
     ./claude.nix
-    ./codex.nix
+    ./codex
     ./zed.nix
     ./herdr.nix
     ./ui-ux-pro-max.nix

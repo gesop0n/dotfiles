@@ -16,7 +16,7 @@
 #   リポジトリ        : https://github.com/openai/codex
 #
 # 管理方法 : このファイルは「ベース」であって ~/.codex/config.toml 本体ではない。
-#            nix/home-manager/codex.nix が home-rebuild のたびに
+#            nix/home-manager/codex/ が home-rebuild のたびに
 #              ~/.codex/config.toml = このファイル(逐語) + 既存ファイルから
 #                                     引き継いだマシン固有テーブル
 #            として実ファイルを作り直す。symlink ではないので codex は自由に
@@ -25,7 +25,7 @@
 # 注意 : ここを直したら home-rebuild するまで ~/.codex/config.toml には反映されない。
 #
 #        codex 自身が書くもののうち、マシン固有として引き継ぐテーブルは
-#        codex.nix の localTables で指定している:
+#        codex/default.nix の localTables で指定している:
 #          [projects."<path>"].trust_level : ディレクトリを信頼したとき
 #          [tui.*]                         : TUI の操作や NUX カウンタ
 #        それ以外のキーを codex が書いた場合は、rebuild 時に警告を出して
