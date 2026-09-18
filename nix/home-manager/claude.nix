@@ -64,7 +64,7 @@ let
   };
 in
 {
-  # herdr.nix が skill の配布先として参照する。
+  # skills.nix が skill の配布先として参照する。
   _module.args.claudeConfigDirs = claudeConfigDirs;
 
   # Claude Code 2.x の設定ファイルの役割:

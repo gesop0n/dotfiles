@@ -47,7 +47,7 @@
 
     # UI/UX 設計用の Claude Code / Codex skill。
     # flake ではないリポジトリなので flake = false で生ソースとして取得し、
-    # ui-ux-pro-max.nix が各 skill dir へ配布する。
+    # skills.nix が各 skill dir へ配布する。
     ui-ux-pro-max-skill = {
       url = "github:nextlevelbuilder/ui-ux-pro-max-skill";
       flake = false;
