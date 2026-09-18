@@ -155,12 +155,28 @@ network_access = false
 # [features]
 # hooks = true
 
-# MCP サーバー。管理は `codex mcp add/list/remove`
-# [mcp_servers.context7]
-# command = "npx"
-# args = ["-y", "@upstash/context7-mcp"]
+# MCP サーバーはファイル末尾の専用セクションで定義している。
+# (スカラーキーをテーブル見出しより後ろに書くとそのテーブルの中身になるため、
+#  テーブルは全てファイル末尾へ寄せる)
 
 # プロファイルは別ファイル方式:
 #   ~/.codex/<name>.config.toml を作って `codex -p <name>` で重ねる
 #   例) ~/.codex/safe.config.toml に approvals_reviewer = "user" を書いて `codex -p safe`
 
+
+# -----------------------------------------------------------------------------
+# MCP サーバー
+# https://developers.openai.com/codex/local-config
+# -----------------------------------------------------------------------------
+# `codex mcp add/list/remove` でも設定できるが、あれが書くのは ~/.codex/config.toml
+# 本体なので home-rebuild のたびに警告付きで捨てられる。常用するサーバーはここに書く。
+#
+# MCP サーバーは PATH を絞られた状態で起動されうるので、command は絶対パスで指定する
+# (Claude Code 側の nix/home-manager/claude.nix も同じパスを指している)。
+
+# codegraph : コードベースの symbol / 呼び出し関係を SQLite の知識グラフとして引く。
+# 実体は mise 管理の npm パッケージ (mise.nix の tools."npm:@colbymchenry/codegraph")。
+# .codegraph/ が無いプロジェクトでは projectPath を渡すか、`codegraph init` が必要。
+[mcp_servers.codegraph]
+command = "/Users/gesopon/.local/share/mise/installs/npm-colbymchenry-codegraph/latest/bin/codegraph"
+args = ["serve", "--mcp"]
