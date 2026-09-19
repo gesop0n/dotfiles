@@ -15,10 +15,8 @@
     ./claude.nix
     ./codex
     ./zed.nix
-    ./skills.nix
+    ./skills
     ./herdr.nix
-    ./ui-ux-pro-max.nix
-    ./archify.nix
     ./gtr.nix
     ./nh.nix
   ];

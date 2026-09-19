@@ -12,6 +12,14 @@ let
     name: map (dir: "${dir}/skills/${name}") claudeConfigDirs ++ [ ".agents/skills/${name}" ];
 in
 {
+  # skill は 1 つ 1 ファイルでこのディレクトリに置く。
+  imports = [
+    ./archify.nix
+    ./d2-diagrams.nix
+    ./herdr.nix
+    ./ui-ux-pro-max.nix
+  ];
+
   # skill の配布先はどれも同じなので、配布ロジックはここに1つだけ置き、
   # 各 skill は my.agentSkills に source を宣言するだけにする。
   options.my.agentSkills = lib.mkOption {

@@ -6,7 +6,7 @@
   #
   # upstream は `npx skills add tt-a1i/archify -g` を案内しているが、これは
   # ~/.claude/skills へコピーするだけの手順。宣言的に持ちたいので
-  # ui-ux-pro-max と同様にリポジトリを flake input で pin して直接配置する。
+  # リポジトリを flake input で pin して直接配置する。
   #
   # 依存は Node.js >= 18 のみ (mise の node が実体)。package.json の
   # ajv / parse5 / saxes / simple-icons は devDependencies で、コード生成と
