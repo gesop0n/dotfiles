@@ -23,6 +23,13 @@
         group = "FileTypeIndent";
         command = "setlocal tabstop=4 shiftwidth=4 noexpandtab";
       }
+      {
+        # .clang-format の IndentWidth: 4 に合わせる (cindent は shiftwidth を見る)
+        event = "FileType";
+        pattern = "cpp";
+        group = "FileTypeIndent";
+        command = "setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab";
+      }
     ];
 
     globals = {
