@@ -8,6 +8,13 @@
           nixd.enable = true;
           lua_ls.enable = true;
           gopls.enable = true;
+          clangd = {
+            # プロジェクトの devShell が用意する clangd ラッパー
+            # (--query-driver で g++ のシステム include を拾う) を優先したいので、
+            # nixvim 側の clang-tools は PATH の末尾に置いてフォールバックにする。
+            enable = true;
+            packageFallback = true;
+          };
           vtsls = {
             enable = true;
             packageFallback = true;
