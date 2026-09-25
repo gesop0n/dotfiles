@@ -39,7 +39,10 @@
 
     colorschemes.catppuccin = {
       enable = true;
-      settings.flavour = "mocha"; # latte / frappe / macchiato / mocha
+      settings = {
+        flavour = "mocha"; # latte / frappe / macchiato / mocha
+        transparent_background = true;
+      };
     };
   };
 }

@@ -5,7 +5,7 @@ function M.apply(config)
   config.font = wezterm.font('MesloLGS Nerd Font', { weight = 'Regular' })
   config.font_size = 16.0
 
-  config.color_scheme = 'Tokyo Night (Gogh)'
+  config.color_scheme = 'Catppuccin Mocha'
 
   config.window_decorations = "RESIZE"
   config.window_background_opacity = 0.75
