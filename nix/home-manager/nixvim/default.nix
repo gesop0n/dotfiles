@@ -4,6 +4,7 @@
     ./options.nix
     ./keymaps.nix
     ./plugins/lsp.nix
+    ./plugins/format.nix
     ./plugins/ui.nix
     ./plugins/editor.nix
     ./plugins/git.nix

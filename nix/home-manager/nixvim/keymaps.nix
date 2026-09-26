@@ -1,6 +1,39 @@
 { ... }:
+let
+  # NOTE: nvim-treesitter-textobjects — 関数・クラス・引数単位の選択/移動
+  selectTextobject = key: query: desc: {
+    mode = [
+      "x"
+      "o"
+    ];
+    inherit key;
+    action.__raw = "function() require('nvim-treesitter-textobjects.select').select_textobject('${query}', 'textobjects') end";
+    options.desc = desc;
+  };
+  moveTextobject = key: fn: query: desc: {
+    mode = [
+      "n"
+      "x"
+      "o"
+    ];
+    inherit key;
+    action.__raw = "function() require('nvim-treesitter-textobjects.move').${fn}('${query}', 'textobjects') end";
+    options.desc = desc;
+  };
+in
 {
   programs.nixvim.keymaps = [
+    (selectTextobject "af" "@function.outer" "Around function")
+    (selectTextobject "if" "@function.inner" "Inside function")
+    (selectTextobject "ac" "@class.outer" "Around class")
+    (selectTextobject "ic" "@class.inner" "Inside class")
+    (selectTextobject "aa" "@parameter.outer" "Around argument")
+    (selectTextobject "ia" "@parameter.inner" "Inside argument")
+    (moveTextobject "]f" "goto_next_start" "@function.outer" "Next function start")
+    (moveTextobject "[f" "goto_previous_start" "@function.outer" "Previous function start")
+    (moveTextobject "]F" "goto_next_end" "@function.outer" "Next function end")
+    (moveTextobject "[F" "goto_previous_end" "@function.outer" "Previous function end")
+
     # NOTE: flash.nvim — 画面上の任意の場所へ高速ジャンプ
     {
       mode = [
@@ -68,6 +101,52 @@
       key = "<Leader>fr";
       action = "<cmd>FzfLua oldfiles<cr>";
       options.desc = "Recent files";
+    }
+
+    # NOTE: trouble.nvim — 診断・シンボル・参照の一覧
+    {
+      mode = "n";
+      key = "<Leader>xx";
+      action = "<cmd>Trouble diagnostics toggle<cr>";
+      options.desc = "Diagnostics (Trouble)";
+    }
+    {
+      mode = "n";
+      key = "<Leader>xX";
+      action = "<cmd>Trouble diagnostics toggle filter.buf=0<cr>";
+      options.desc = "Buffer diagnostics (Trouble)";
+    }
+    {
+      mode = "n";
+      key = "<Leader>xL";
+      action = "<cmd>Trouble loclist toggle<cr>";
+      options.desc = "Location list (Trouble)";
+    }
+    {
+      mode = "n";
+      key = "<Leader>xQ";
+      action = "<cmd>Trouble qflist toggle<cr>";
+      options.desc = "Quickfix list (Trouble)";
+    }
+    {
+      mode = "n";
+      key = "<Leader>cs";
+      action = "<cmd>Trouble symbols toggle focus=false<cr>";
+      options.desc = "Symbols (Trouble)";
+    }
+    {
+      mode = "n";
+      key = "<Leader>cl";
+      action = "<cmd>Trouble lsp toggle focus=false win.position=right<cr>";
+      options.desc = "LSP definitions / references (Trouble)";
+    }
+
+    # NOTE: conform.nvim — 手動フォーマット (保存時は自動)
+    {
+      mode = "n";
+      key = "<Leader>cf";
+      action.__raw = "function() require('conform').format({ async = true }) end";
+      options.desc = "Format buffer";
     }
 
     # NOTE: バッファ移動
