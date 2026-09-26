@@ -39,6 +39,7 @@
       "karabiner-elements"
       "docker-desktop"
       "skim"
+      "zed"
     ];
   };
 }
