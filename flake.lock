@@ -111,6 +111,23 @@
         "type": "github"
       }
     },
+    "git-worktree-runner": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789412573,
+        "narHash": "sha256-w15Todxvy6VyVE3EryOq4lAb0uUaLvunRjNW+xIdgi8=",
+        "owner": "coderabbitai",
+        "repo": "git-worktree-runner",
+        "rev": "f4df6344a362303e6b47bc92955fef3bba468426",
+        "type": "github"
+      },
+      "original": {
+        "owner": "coderabbitai",
+        "ref": "v2.11.1",
+        "repo": "git-worktree-runner",
+        "type": "github"
+      }
+    },
     "grok-build-nix": {
       "inputs": {
         "nixpkgs": [
@@ -266,6 +283,7 @@
         "archify-skill": "archify-skill",
         "claude-code-nix": "claude-code-nix",
         "codex-cli-nix": "codex-cli-nix",
+        "git-worktree-runner": "git-worktree-runner",
         "grok-build-nix": "grok-build-nix",
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",

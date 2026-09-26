@@ -22,17 +22,14 @@
   homebrew = {
     enable = true;
 
-    taps = [
-      "coderabbitai/tap"
-    ];
+    # 宣言にない formula / cask / tap は switch 時にアンインストールする。
+    # 宣言したものの依存として入ったものは対象外。
+    # "zap" にするとアプリの設定ファイルまで消えるので "uninstall" に留める。
+    onActivation.cleanup = "uninstall";
 
-    brews = [
-      {
-        name = "coderabbitai/tap/git-gtr";
-        trusted = true;
-      }
-    ];
-
+    # CLI ツールは nix (home-manager) で管理し、Homebrew は GUI アプリ (cask) 専用にする。
+    # brew の formula は依存として git なども引き込み、`brew shellenv` により
+    # /opt/homebrew/bin が PATH の先頭に来るため、nix 側の同名コマンドを隠してしまう。
     casks = [
       "maccy"
       "hammerspoon"

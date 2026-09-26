@@ -61,6 +61,14 @@
       url = "github:tt-a1i/archify/v2.16.0";
       flake = false;
     };
+
+    # git-gtr (git worktree runner)。nixpkgs に無いため gtr.nix でパッケージ化する。
+    # リリースタグを pin する。更新はこのタグを書き換える (nix flake update では動かない)。
+    # gtr.nix の version も合わせて更新する (ずれるとビルド時のチェックで失敗する)。
+    git-worktree-runner = {
+      url = "github:coderabbitai/git-worktree-runner/v2.11.1";
+      flake = false;
+    };
   };
 
   outputs =
