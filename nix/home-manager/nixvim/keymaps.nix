@@ -169,6 +169,32 @@ in
       options.desc = "Close buffer";
     }
 
+    # NOTE: toggleterm — 向きを指定してターミナルを開閉する (<C-\> でも開閉できる)
+    {
+      mode = "n";
+      key = "<Leader>tf";
+      action = "<cmd>ToggleTerm direction=float<cr>";
+      options.desc = "Toggle floating terminal";
+    }
+    {
+      mode = "n";
+      key = "<Leader>th";
+      action = "<cmd>ToggleTerm direction=horizontal<cr>";
+      options.desc = "Toggle horizontal terminal";
+    }
+    {
+      mode = "n";
+      key = "<Leader>tv";
+      action = "<cmd>ToggleTerm direction=vertical<cr>";
+      options.desc = "Toggle vertical terminal";
+    }
+    {
+      mode = "n";
+      key = "<Leader>ts";
+      action = "<cmd>TermSelect<cr>";
+      options.desc = "Select terminal";
+    }
+
     # NOTE: lazygit をフローティングターミナルで開く
     {
       mode = "n";
