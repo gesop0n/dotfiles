@@ -21,6 +21,18 @@ function M.apply(config)
     -- ペインを閉じる
     { key = 'w', mods = 'CMD', action = act.CloseCurrentPane({ confirm = true }) },
 
+    -- フォーカス中のペインの作業ディレクトリを Zed で開く
+    {
+      key = 'e',
+      mods = 'CMD|SHIFT',
+      action = wezterm.action_callback(function(_, pane)
+        local cwd = pane:get_current_working_dir()
+        if cwd and cwd.scheme == 'file' then
+          wezterm.background_child_process({ 'zed', cwd.file_path })
+        end
+      end),
+    },
+
     -- Option+¥ でバックスラッシュを入力
     { key = '¥', mods = 'OPT', action = act.SendString('\\') },
   }

@@ -22,6 +22,15 @@
       # WezTerm 側の color_scheme (Tokyo Night) と揃える。
       theme.name = "tokyo-night";
 
+      keys.command = [
+        {
+          key = "prefix+shift+e";
+          type = "shell";
+          command = ''test -n "$HERDR_ACTIVE_PANE_CWD" && zed "$HERDR_ACTIVE_PANE_CWD"'';
+          description = "Open focused pane in Zed";
+        }
+      ];
+
       update = {
         # バイナリは nixpkgs 管理なので `herdr update` は使えない。
         # 更新は `nix flake update nixpkgs` 経由で行うため、
