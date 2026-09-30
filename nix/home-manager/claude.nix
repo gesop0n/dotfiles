@@ -33,17 +33,6 @@ let
     includeCoAuthoredBy = false;
   };
 
-  accountNames = [
-    "gesop0n"
-    "KotaIshikuro"
-  ];
-  accountDirsSh = lib.concatMapStringsSep " " (name: "\"$HOME/.claude-config/${name}\"") accountNames;
-
-  # Claude Code の personal skill / commands は「user config dir」配下から読まれる。
-  # CLAUDE_CONFIG_DIR 未設定なら ~/.claude、アカウント切り替え時は
-  # ~/.claude-config/<account> がその config dir になる。
-  claudeConfigDirs = [ ".claude" ] ++ map (name: ".claude-config/${name}") accountNames;
-
   initialSettings = managedSettings // {
     effortLevel = "high";
     theme = "dark";
@@ -64,9 +53,6 @@ let
   };
 in
 {
-  # skills.nix が skill の配布先として参照する。
-  _module.args.claudeConfigDirs = claudeConfigDirs;
-
   # Claude Code 2.x の設定ファイルの役割:
   # - ~/.claude/settings.json : theme, effortLevel, enabledPlugins, permissions
   # - ~/.claude.json          : user-scope MCP サーバー (mcpServers キー)
@@ -92,51 +78,15 @@ in
     fi
   '';
 
-  # permissions と MCP サーバーを各設定ディレクトリに反映する。
-  # user-scope MCP は設定ディレクトリごとの .claude.json の mcpServers キーに保存される。
-  #
-  # settings.json はアカウント dir のみを対象にする（デフォルトの
-  # ~/.claude/settings.json は上の claudeSettings が担当）。
-  # 一方 MCP は CLAUDE_CONFIG_DIR 未設定時に ~/.claude.json が読まれるため、
-  # デフォルト($HOME)とアカウント dir の両方へ配る必要がある。
-  home.activation.claudeAccountSettings = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    _apply_account_settings() {
-      local SETTINGS_FILE="$1"
-      [ -L "$SETTINGS_FILE" ] && rm "$SETTINGS_FILE"
-      if [ ! -f "$SETTINGS_FILE" ]; then
-        printf '%s\n' '${
-          builtins.toJSON (managedSettings // { permissions = initialSettings.permissions; })
-        }' > "$SETTINGS_FILE"
-      else
-        ${pkgs.jq}/bin/jq \
-          --argjson perms '${builtins.toJSON initialSettings.permissions}' \
-          '(.permissions = ((.permissions // {}) + $perms)) * ${builtins.toJSON managedSettings}' \
-          "$SETTINGS_FILE" > "$SETTINGS_FILE.tmp" \
-          && mv "$SETTINGS_FILE.tmp" "$SETTINGS_FILE"
-      fi
-    }
-
-    _apply_account_mcp() {
-      local CLAUDE_JSON="$1"
-      if [ ! -f "$CLAUDE_JSON" ]; then
-        printf '%s\n' '${builtins.toJSON { mcpServers = managedMcpServers; }}' > "$CLAUDE_JSON"
-      else
-        ${pkgs.jq}/bin/jq '.mcpServers = ((.mcpServers // {}) + ${builtins.toJSON managedMcpServers})' \
-          "$CLAUDE_JSON" > "$CLAUDE_JSON.tmp" \
-          && mv "$CLAUDE_JSON.tmp" "$CLAUDE_JSON"
-      fi
-    }
-
-    for ACCOUNT_DIR in ${accountDirsSh}; do
-      if [ -d "$ACCOUNT_DIR" ]; then
-        _apply_account_settings "$ACCOUNT_DIR/settings.json"
-      fi
-    done
-
-    for CONFIG_ROOT in "$HOME" ${accountDirsSh}; do
-      if [ -d "$CONFIG_ROOT" ]; then
-        _apply_account_mcp "$CONFIG_ROOT/.claude.json"
-      fi
-    done
+  # user-scope MCP サーバーを ~/.claude.json の mcpServers キーに反映する。
+  home.activation.claudeMcp = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    CLAUDE_JSON="$HOME/.claude.json"
+    if [ ! -f "$CLAUDE_JSON" ]; then
+      printf '%s\n' '${builtins.toJSON { mcpServers = managedMcpServers; }}' > "$CLAUDE_JSON"
+    else
+      ${pkgs.jq}/bin/jq '.mcpServers = ((.mcpServers // {}) + ${builtins.toJSON managedMcpServers})' \
+        "$CLAUDE_JSON" > "$CLAUDE_JSON.tmp" \
+        && mv "$CLAUDE_JSON.tmp" "$CLAUDE_JSON"
+    fi
   '';
 }

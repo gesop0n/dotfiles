@@ -1,15 +1,15 @@
 {
   lib,
   config,
-  claudeConfigDirs,
   ...
 }:
 let
-  # Claude Code の personal skill は user config dir (claude.nix の
-  # claudeConfigDirs) 配下から、Codex の user skill は ~/.agents/skills から
-  # 読まれる。1 つの skill をその全てへ配る。
-  targetsFor =
-    name: map (dir: "${dir}/skills/${name}") claudeConfigDirs ++ [ ".agents/skills/${name}" ];
+  # Claude Code の personal skill は ~/.claude/skills から、Codex の user skill は
+  # ~/.agents/skills から読まれる。1 つの skill を両方へ配る。
+  targetsFor = name: [
+    ".claude/skills/${name}"
+    ".agents/skills/${name}"
+  ];
 in
 {
   # skill は 1 つ 1 ファイルでこのディレクトリに置く。
