@@ -1,0 +1,147 @@
+# アイコン付き構成図 (カード型) のテンプレート
+# 例: 楽天 RMS 商品 API (search → get) から BigQuery (Bronze → Silver) まで
+# 列 (コンテナ) とカードを差し替えて使う。アイコンは ./icons/ に置く。
+# 作り方と注意点は references/ICON_CARDS.md を参照。
+vars: {
+  d2-config: {
+    pad: 40
+  }
+  rms: ./icons/rakuten-rms.svg
+  list: ./icons/id-list.svg
+  bq: ./icons/bigquery.svg
+}
+
+classes: {
+  column: {
+    grid-rows: 1
+    style: {
+      fill: transparent
+      stroke: transparent
+      font-size: 16
+      bold: true
+      font-color: "#64748b"
+    }
+  }
+  card: {
+    width: 150
+    height: 120
+    label.near: bottom-center
+    icon.near: top-center
+    style: {
+      fill: "#ffffff"
+      stroke: "#e2e8f0"
+      border-radius: 14
+      shadow: true
+      font-size: 14
+      font-color: "#1e293b"
+    }
+  }
+  flow: {
+    style: {
+      stroke: "#64748b"
+      stroke-width: 2
+    }
+  }
+}
+
+title: 楽天 RMS 商品API：search / get と Bronze / Silver の役割分担 {
+  shape: text
+  near: top-center
+  style: {
+    font-size: 24
+    bold: true
+    font-color: "#1e293b"
+  }
+}
+
+# 列ごとにコンテナを置き、見出しとカードの高さをそろえる
+grid-columns: 5
+horizontal-gap: 32
+
+search: "search：探す" {
+  class: column
+  style: {
+    fill: "#eff6ff"
+    stroke: "#93c5fd"
+    border-radius: 16
+    font-color: "#1d4ed8"
+  }
+  item: "items.search\nキーワード等で\n商品を探す" {
+    class: card
+    icon: ${rms}
+  }
+}
+
+found: 検索結果 {
+  class: column
+  item: "商品の一覧\n※商品情報も含む" {
+    class: card
+    icon: ${list}
+  }
+}
+
+get: "get：取得する" {
+  class: column
+  style: {
+    fill: "#ecfdf5"
+    stroke: "#6ee7b7"
+    border-radius: 16
+    font-color: "#047857"
+  }
+  item: "items.get\n管理番号を指定して\n詳細を取得" {
+    class: card
+    icon: ${rms}
+  }
+}
+
+bronze: "Bronze：そのまま保存" {
+  class: column
+  style: {
+    fill: "#fdf6ee"
+    stroke: "#e0b285"
+    border-radius: 16
+    font-color: "#9a5b1e"
+  }
+  item: "商品の詳細\n（生データ）" {
+    class: card
+    icon: ${bq}
+  }
+}
+
+silver: "Silver：加工・整理" {
+  class: column
+  style: {
+    fill: "#f3f4f6"
+    stroke: "#a3abb8"
+    border-radius: 16
+    font-color: "#4b5563"
+  }
+  item: "商品テーブル\n（商品単位に整理）" {
+    class: card
+    icon: ${bq}
+  }
+}
+
+search.item -> found.item -> get.item -> bronze.item -> silver.item: {class: flow}
+
+notes: ポイント {
+  near: bottom-center
+  style: {
+    fill: "#f8fafc"
+    stroke: "#cbd5e1"
+    border-radius: 12
+    font-size: 15
+    bold: true
+    font-color: "#1e293b"
+  }
+
+  body: |md
+    - **search** は「条件に合う商品・注文などを探す」、**get** は「番号を指定して対象の情報を取得する」役割
+    - 商品管理番号がまだ分からない段階では、items.search で商品を見つけてから items.get で詳細を取得する
+    - search が返す内容は API ごとに異なる（items.search は商品情報も返す）。
+    - **Bronze** には get の取得結果をそのまま保存し、**Silver** で商品単位に加工・整理する
+  | {
+    style.fill: transparent
+    style.stroke: transparent
+  }
+}
