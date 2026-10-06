@@ -14,6 +14,7 @@
     ./lazygit.nix
     ./claude.nix
     ./codex
+    ./grok.nix
     ./zed.nix
     ./skills
     ./herdr.nix
