@@ -16,6 +16,7 @@
     gh
     nixd
     d2
+    ccusage
 
     # Claude Code / Codex は python を同梱せず PATH の python3 を spawn する
     # (ui-ux-pro-max のような skill 同梱スクリプトがこれを使う)。
