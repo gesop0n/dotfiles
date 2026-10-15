@@ -42,6 +42,7 @@
     redis # redis-server / redis-cli (ローカル開発用)
     ngrok # ローカルサーバーの外部公開トンネル
     firebase-tools
+    gws # Google Workspace CLI (Drive / Gmail / Calendar / Sheets など)
 
   ];
 }
