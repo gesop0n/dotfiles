@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 let
@@ -10,6 +11,19 @@ let
     ".claude/skills/${name}"
     ".agents/skills/${name}"
   ];
+
+  # home.file は source が存在しなくても黙ってリンク切れの symlink を作る。
+  # upstream がディレクトリ構成を変えたときに気付けるよう、SKILL.md が
+  # 無ければビルドを失敗させる。
+  checked =
+    name: source:
+    pkgs.runCommandLocal "agent-skill-${name}" { } ''
+      if [ ! -f ${source}/SKILL.md ]; then
+        echo "agent skill '${name}': ${source}/SKILL.md が存在しない" >&2
+        exit 1
+      fi
+      ln -s ${source} $out
+    '';
 in
 {
   # skill は 1 つ 1 ファイルでこのディレクトリに置く。
@@ -41,7 +55,7 @@ in
     lib.mapAttrsToList (
       name: source:
       lib.genAttrs (targetsFor name) (_: {
-        inherit source;
+        source = checked name source;
       })
     ) config.my.agentSkills
   );
