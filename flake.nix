@@ -40,6 +40,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # .env 系ファイルを値を出さずにキー単位で比べる自作コマンド (Rust)。
+    envdiff = {
+      url = "github:gesop0n/envdiff";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -78,12 +84,6 @@
     in
     {
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-tree;
-
-      # 自作コマンドを単体でビルドする (テストもここで走る)。
-      #   nix build .#envdiff
-      packages.${system}.envdiff =
-        nixpkgs.legacyPackages.${system}.callPackage ./nix/home-manager/envdiff/package.nix
-          { };
 
       darwinConfigurations = {
         "Kotas-MacBook-Pro" = import ./nix/darwin/default.nix {

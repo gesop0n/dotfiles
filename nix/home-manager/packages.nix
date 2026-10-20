@@ -11,6 +11,7 @@
     ripgrep
     fd
     fzf # git-gtr の `gtr cd` 引数なし時のコマンドパレットに必要
+    inputs.envdiff.packages.${system}.default # .env 系ファイルを値を出さずにキー単位で比べる (自作)
 
     # Development Tools
     gh
