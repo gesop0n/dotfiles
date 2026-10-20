@@ -20,6 +20,7 @@
     ./herdr.nix
     ./gtr.nix
     ./nh.nix
+    ./envdiff
   ];
 
   home.username = "gesopon";

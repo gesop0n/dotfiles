@@ -79,6 +79,12 @@
     {
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-tree;
 
+      # 自作コマンドを単体でビルドする (テストもここで走る)。
+      #   nix build .#envdiff
+      packages.${system}.envdiff =
+        nixpkgs.legacyPackages.${system}.callPackage ./nix/home-manager/envdiff/package.nix
+          { };
+
       darwinConfigurations = {
         "Kotas-MacBook-Pro" = import ./nix/darwin/default.nix {
           inherit inputs system;
