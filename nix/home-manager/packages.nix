@@ -12,6 +12,7 @@
     fd
     fzf # git-gtr の `gtr cd` 引数なし時のコマンドパレットに必要
     inputs.envdiff.packages.${system}.default # .env 系ファイルを値を出さずにキー単位で比べる (自作)
+    inputs.neondburl.packages.${system}.default # .env 系ファイルの DATABASE_URL の Neon endpoint を差し替える (自作)
 
     # Development Tools
     gh

@@ -46,6 +46,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # .env 系ファイルの DATABASE_URL が指す Neon の endpoint を差し替える自作コマンド (Rust)。
+    neondburl = {
+      url = "github:gesop0n/neondburl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
