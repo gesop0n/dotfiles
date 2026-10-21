@@ -32,6 +32,7 @@ in
     ./d2-diagrams.nix
     ./herdr.nix
     ./ui-ux-pro-max.nix
+    ./yomiyasu.nix
   ];
 
   # skill の配布先はどれも同じなので、配布ロジックはここに1つだけ置き、

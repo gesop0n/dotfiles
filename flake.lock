@@ -372,7 +372,8 @@
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_3",
         "nixvim": "nixvim",
-        "ui-ux-pro-max-skill": "ui-ux-pro-max-skill"
+        "ui-ux-pro-max-skill": "ui-ux-pro-max-skill",
+        "yomiyasu-skill": "yomiyasu-skill"
       }
     },
     "rust-overlay": {
@@ -522,6 +523,22 @@
       "original": {
         "owner": "nextlevelbuilder",
         "repo": "ui-ux-pro-max-skill",
+        "type": "github"
+      }
+    },
+    "yomiyasu-skill": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792515247,
+        "narHash": "sha256-aX/4syEAQU/OUHujTfHAxfS1KsXfPnsjfXiguyqBWjs=",
+        "owner": "nanaism",
+        "repo": "yomiyasu",
+        "rev": "fbe02c93877d697cc53d9377b7a45dd8a1dd99b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nanaism",
+        "repo": "yomiyasu",
         "type": "github"
       }
     }

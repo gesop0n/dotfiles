@@ -74,6 +74,14 @@
       flake = false;
     };
 
+    # AI が生成した日本語を推敲する skill。skill 本体は skills/yomiyasu/。
+    # main はリリースの squash merge と docs の更新だけで進むので、
+    # ui-ux-pro-max-skill と同じく main を追い、`nix flake update` で更新する。
+    yomiyasu-skill = {
+      url = "github:nanaism/yomiyasu";
+      flake = false;
+    };
+
     # git-gtr (git worktree runner)。nixpkgs に無いため gtr.nix でパッケージ化する。
     # リリースタグを pin する。更新はこのタグを書き換える (nix flake update では動かない)。
     # gtr.nix の version も合わせて更新する (ずれるとビルド時のチェックで失敗する)。
