@@ -12,6 +12,8 @@
         node = "latest";
         "npm:@colbymchenry/codegraph" = "latest";
         "npm:vercel" = "latest";
+        # Markdown をブラウザで開くビューア。nixpkgs の mo は同名の別ツールなので mise で入れる。
+        "aqua:k1LoW/mo" = "latest";
       };
     };
   };
