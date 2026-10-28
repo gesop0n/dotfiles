@@ -19,6 +19,7 @@
     nixd
     d2
     ccusage
+    actionlint # GitHub Actions の workflow を検査する (run: 内のシェルは wrapProgram で同梱の shellcheck が見る)
 
     # Claude Code / Codex は python を同梱せず PATH の python3 を spawn する
     # (ui-ux-pro-max のような skill 同梱スクリプトがこれを使う)。
