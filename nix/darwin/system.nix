@@ -1,6 +1,7 @@
 {
   inputs,
   system,
+  lib,
   ...
 }:
 {
@@ -19,6 +20,21 @@
 
   nixpkgs.hostPlatform = system;
   nixpkgs.config.allowUnfree = true;
+
+  # redis 8.10.3 は Makefile の SDK パスを `xcrun --show-sdk-path` に変えたため、
+  # nixpkgs の Darwin 向け postPatch (--replace-fail) が一致せずビルドが落ちる。
+  # 上流は postPatch を消して直した (NixOS/nixpkgs#580069) ので同じことをする。
+  # lock の nixpkgs に修正が届くと、古い postPatch が無くなるので素通しして
+  # (キャッシュが効く) 評価時に警告を出す。警告が出たら overlay ごと消す。
+  nixpkgs.overlays = [
+    (_final: prev: {
+      redis =
+        if lib.hasInfix "CommandLineTools" (prev.redis.postPatch or "") then
+          prev.redis.overrideAttrs { postPatch = ""; }
+        else
+          lib.warn "nixpkgs の redis は修正済み (NixOS/nixpkgs#580069)。nix/darwin/system.nix の redis overlay を消してよい" prev.redis;
+    })
+  ];
 
   programs.zsh.enable = true;
 }
