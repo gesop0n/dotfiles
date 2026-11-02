@@ -17,24 +17,25 @@ local ICONS = {
     zoom     = wezterm.nerdfonts.md_magnify,
 }
 
+-- color_scheme には追従しないので、Catppuccin Mocha のパレットに手で揃えている
 local ICON_COLORS = {
-    docker = "#4169e1",
-    neovim = "#57A143",
-    nb     = "#9370DB",
-    ssh    = "#ff6b6b",
-    claude = "#D97757",
+    docker = "#89b4fa",
+    neovim = "#a6e3a1",
+    nb     = "#cba6f7",
+    ssh    = "#f38ba8",
+    claude = "#fab387",
 }
 
 local TAB_COLORS = {
-    background_active     = "#9a7d20",
-    foreground_active     = "#1a1b26",
-    background_inactive   = "#3b3d56",
-    foreground_inactive   = "#888aa4",
-    background_ssh_active = "#ff6b6b",
-    foreground_ssh_active = "#ffffff",
+    background_active     = "#313244",
+    foreground_active     = "#cdd6f4",
+    background_inactive   = "#45475a",
+    foreground_inactive   = "#7f849c",
+    background_ssh_active = "#f38ba8",
+    foreground_ssh_active = "#11111b",
 }
 
-local BAR_BG = "#15161e"
+local BAR_BG = "#181825"
 
 local DECO = {
     left  = wezterm.nerdfonts.ple_left_half_circle_thick,
@@ -86,7 +87,7 @@ end
 
 local function get_icon_and_color(process_name, pane_title, cmdline, cwd, is_ssh, is_active, is_claude)
     if is_ssh then
-        return ICONS.ssh, is_active and "#ffffff" or ICON_COLORS.ssh
+        return ICONS.ssh, is_active and TAB_COLORS.foreground_ssh_active or ICON_COLORS.ssh
     end
     if pane_title == "nvim" or process_name == "nvim" then
         return ICONS.neovim, ICON_COLORS.neovim
@@ -100,7 +101,7 @@ local function get_icon_and_color(process_name, pane_title, cmdline, cwd, is_ssh
     if process_name == "docker" or (pane_title and pane_title:find("docker")) then
         return ICONS.docker, ICON_COLORS.docker
     end
-    return ICONS.fallback, TAB_COLORS.foreground_inactive
+    return ICONS.fallback, is_active and TAB_COLORS.foreground_active or TAB_COLORS.foreground_inactive
 end
 
 local function get_tab_colors(is_active, is_ssh)

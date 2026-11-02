@@ -8,7 +8,7 @@ function M.apply(config)
   config.color_scheme = 'Catppuccin Mocha'
 
   config.window_decorations = "RESIZE"
-  config.window_background_opacity = 0.75
+  config.window_background_opacity = 0.90
   config.macos_window_background_blur = 30
   config.window_padding = { left = 16, right = 16, top = 10, bottom = 10 }
 end

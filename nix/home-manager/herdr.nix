@@ -19,8 +19,8 @@
       # 最初から false にしてオンボーディングをスキップする。
       onboarding = false;
 
-      # WezTerm 側の color_scheme (Tokyo Night) と揃える。
-      theme.name = "tokyo-night";
+      # WezTerm / Neovim の配色 (Catppuccin Mocha) と揃える。
+      theme.name = "catppuccin";
 
       keys.command = [
         {
