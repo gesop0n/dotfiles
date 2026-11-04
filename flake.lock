@@ -372,6 +372,7 @@
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_3",
         "nixvim": "nixvim",
+        "stack-diagram-skill": "stack-diagram-skill",
         "ui-ux-pro-max-skill": "ui-ux-pro-max-skill",
         "yomiyasu-skill": "yomiyasu-skill"
       }
@@ -415,6 +416,23 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "stack-diagram-skill": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793677292,
+        "narHash": "sha256-VUOxIsW0XabuaZA8HxEICuHx2RJKgpdoYlvCaDzmxUM=",
+        "owner": "caru-ini",
+        "repo": "stack-diagram",
+        "rev": "1ed53e3e9525364ae5d82e0430f2bb3f7ef4c838",
+        "type": "github"
+      },
+      "original": {
+        "owner": "caru-ini",
+        "ref": "v0.4.0",
+        "repo": "stack-diagram",
         "type": "github"
       }
     },

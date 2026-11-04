@@ -82,6 +82,14 @@
       flake = false;
     };
 
+    # 公式ロゴ入りの構成図を自己完結 HTML / PNG で生成する skill。skill 本体は skills/stack-diagram/。
+    # 公開ギャラリーへの投稿スクリプトを含み main の変更も速いので、読んだリリースタグを pin する。
+    # 更新はこのタグを書き換える (nix flake update では動かない)。
+    stack-diagram-skill = {
+      url = "github:caru-ini/stack-diagram/v0.4.0";
+      flake = false;
+    };
+
     # git-gtr (git worktree runner)。nixpkgs に無いため gtr.nix でパッケージ化する。
     # リリースタグを pin する。更新はこのタグを書き換える (nix flake update では動かない)。
     # gtr.nix の version も合わせて更新する (ずれるとビルド時のチェックで失敗する)。
