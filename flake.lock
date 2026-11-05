@@ -227,6 +227,23 @@
         "type": "github"
       }
     },
+    "mattpocock-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793269649,
+        "narHash": "sha256-ej0ATi0BWaAx+83dBwgCQxr9J2L2qEwKhUIeIRJ03Go=",
+        "owner": "mattpocock",
+        "repo": "skills",
+        "rev": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattpocock",
+        "ref": "v1.3.2",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "neondburl": {
       "inputs": {
         "flake-utils": "flake-utils_3",
@@ -367,6 +384,7 @@
         "git-worktree-runner": "git-worktree-runner",
         "grok-build-nix": "grok-build-nix",
         "home-manager": "home-manager",
+        "mattpocock-skills": "mattpocock-skills",
         "neondburl": "neondburl",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",

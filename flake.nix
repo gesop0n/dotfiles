@@ -90,6 +90,14 @@
       flake = false;
     };
 
+    # 要件の詰めから TDD での実装、振り返りまでの流れを支える skill 集。skill 本体は skills/ の分類ごと。
+    # issue tracker へ書き込む skill を含み main の変更も速いので、読んだリリースタグを pin する。
+    # 更新はこのタグを書き換える (nix flake update では動かない)。
+    mattpocock-skills = {
+      url = "github:mattpocock/skills/v1.3.2";
+      flake = false;
+    };
+
     # git-gtr (git worktree runner)。nixpkgs に無いため gtr.nix でパッケージ化する。
     # リリースタグを pin する。更新はこのタグを書き換える (nix flake update では動かない)。
     # gtr.nix の version も合わせて更新する (ずれるとビルド時のチェックで失敗する)。

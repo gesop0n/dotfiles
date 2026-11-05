@@ -31,6 +31,7 @@ in
     ./archify.nix
     ./d2-diagrams.nix
     ./herdr.nix
+    ./mattpocock.nix
     ./stack-diagram.nix
     ./ui-ux-pro-max.nix
     ./yomiyasu.nix
