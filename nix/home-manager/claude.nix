@@ -19,6 +19,14 @@ let
       ];
       env = { };
     };
+    # plamo-translate : PFN の PLaMo で訳す (mise.nix の tools."pypi:plamo-translate")。
+    # `plamo-translate server` が localhost:30000 で立てる streamable HTTP のサーバーに
+    # つなぐだけなので、サーバーは別に起動しておく。show-claude-config が出す
+    # mcp-remote 経由の設定は Claude Desktop 向けで、Claude Code は直接つなげる。
+    plamo-translate = {
+      type = "http";
+      url = "http://localhost:30000/mcp";
+    };
   };
 
   managedPlugins = {

@@ -19,6 +19,12 @@ let
         "--mcp"
       ];
     };
+    # plamo-translate : PFN の PLaMo で訳す (mise.nix の tools."pypi:plamo-translate")。
+    # `plamo-translate server` が localhost:30000 で立てる streamable HTTP のサーバーに
+    # つなぐだけなので、サーバーは別に起動しておく。
+    plamo-translate = {
+      url = "http://localhost:30000/mcp";
+    };
   };
 in
 {
@@ -35,11 +41,21 @@ in
   # (同名の場合は config.toml 側が優先される)。
   home.activation.grokMcp = lib.hm.dag.entryAfter [ "writeBoundary" ] (
     lib.concatStrings (
-      lib.mapAttrsToList (name: server: ''
-        ${grok}/bin/grok mcp add --scope user ${lib.escapeShellArg name} -- \
-          ${lib.escapeShellArgs ([ server.command ] ++ server.args)} > /dev/null \
-          || echo "grok: MCP サーバー ${name} の登録に失敗した"
-      '') managedMcpServers
+      lib.mapAttrsToList (
+        name: server:
+        let
+          # url があれば streamable HTTP、無ければ stdio のサーバーとして登録する。
+          target =
+            if server ? url then
+              "--transport http ${lib.escapeShellArg name} ${lib.escapeShellArg server.url}"
+            else
+              "${lib.escapeShellArg name} -- ${lib.escapeShellArgs ([ server.command ] ++ server.args)}";
+        in
+        ''
+          ${grok}/bin/grok mcp add --scope user ${target} > /dev/null \
+            || echo "grok: MCP サーバー ${name} の登録に失敗した"
+        ''
+      ) managedMcpServers
     )
   );
 }

@@ -181,3 +181,9 @@ network_access = false
 [mcp_servers.codegraph]
 command = "/Users/gesopon/.local/share/mise/installs/npm-colbymchenry-codegraph/latest/bin/codegraph"
 args = ["serve", "--mcp"]
+
+# plamo-translate : PFN の PLaMo で訳す (mise.nix の tools."pypi:plamo-translate")。
+# `plamo-translate server` が localhost:30000 で立てる streamable HTTP のサーバーに
+# つなぐだけなので、サーバーは別に起動しておく。
+[mcp_servers.plamo-translate]
+url = "http://localhost:30000/mcp"
