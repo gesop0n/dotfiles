@@ -37,6 +37,7 @@
       "docker-desktop"
       "skim"
       "zed"
+      "tailscale-app"
     ];
   };
 }
