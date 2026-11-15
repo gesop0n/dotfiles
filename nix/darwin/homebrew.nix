@@ -38,6 +38,7 @@
       "skim"
       "zed"
       "tailscale-app"
+      "obsidian"
     ];
   };
 }
