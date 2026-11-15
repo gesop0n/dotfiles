@@ -39,6 +39,7 @@
       "zed"
       "tailscale-app"
       "obsidian"
+      "zotero"
     ];
   };
 }
