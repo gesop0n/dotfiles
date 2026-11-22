@@ -4,6 +4,25 @@
   system,
   ...
 }:
+let
+  # jacopone/antigravity-nix の agy は公式バイナリを置くだけで、自己更新を止めていない。
+  # store は read-only なので cask 版 (antigravity-cli) と同じく AGY_CLI_DISABLE_AUTO_UPDATE で止め、
+  # 更新は `nix flake update antigravity-nix` に任せる (grok / codex のラッパーと同じ扱い)。
+  # wrapProgram だと実プロセス名が .agy-wrapped になり herdr のエージェント判定から外れうるため、
+  # 元の bin/agy を直接 exec するラッパーを makeWrapper で作る。
+  agy =
+    let
+      unwrapped = inputs.antigravity-nix.packages.${system}.google-antigravity-cli;
+    in
+    pkgs.runCommand "agy-${unwrapped.version}"
+      {
+        nativeBuildInputs = [ pkgs.makeWrapper ];
+        inherit (unwrapped) meta;
+      }
+      ''
+        makeWrapper ${unwrapped}/bin/agy $out/bin/agy --set AGY_CLI_DISABLE_AUTO_UPDATE true
+      '';
+in
 {
   home.packages = with pkgs; [
     # CLI Tools
@@ -35,6 +54,7 @@
     inputs.claude-code-nix.packages.${system}.claude-code
     inputs.codex-cli-nix.packages.${system}.codex # OpenAI Codex CLI (native Rust, 毎時自動更新)
     inputs.grok-build-nix.packages.${system}.grok # xAI Grok Build (公式リリースバイナリを pin, 毎時自動更新)
+    agy # Google Antigravity CLI (jacopone/antigravity-nix, 毎日自動更新)
 
     # Cloud / Network
     # google-cloud-sdk: コンポーネントを追加する場合は以下のように記述する

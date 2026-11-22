@@ -40,6 +40,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Google Antigravity CLI (agy)。nixpkgs の antigravity-cli は数パッチ遅れるため、
+    # 公式リリースを毎日取り込む flake を使う。GUI 版 (Antigravity 2.0 / IDE) は入れない。
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # .env 系ファイルを値を出さずにキー単位で比べる自作コマンド (Rust)。
     envdiff = {
       url = "github:gesop0n/envdiff";
