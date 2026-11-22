@@ -25,7 +25,16 @@ in
   my.agentSkills = removeAttrs skills [ "code-review" ];
 
   # personal skill は同名の組み込みコマンドを置き換えるので、code-review を Claude Code へ
-  # 配ると、effort 指定や --fix を持つ組み込みの /code-review が使えなくなる。Codex にだけ
-  # 配り、Claude Code の /implement が最後に呼ぶレビューは組み込み版に任せる。
-  home.file.".agents/skills/code-review".source = skills.code-review;
+  # 配ると、effort 指定や --fix を持つ組み込みの /code-review が使えなくなる。同名の組み込みが
+  # 無い Codex と Antigravity CLI にだけ配り、Claude Code の /implement が最後に呼ぶレビューは
+  # 組み込み版に任せる。
+  home.file =
+    lib.genAttrs
+      [
+        ".agents/skills/code-review"
+        ".gemini/config/skills/code-review"
+      ]
+      (_: {
+        source = skills.code-review;
+      });
 }

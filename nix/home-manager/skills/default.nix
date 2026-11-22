@@ -6,10 +6,17 @@
 }:
 let
   # Claude Code の personal skill は ~/.claude/skills から、Codex の user skill は
-  # ~/.agents/skills から読まれる。1 つの skill を両方へ配る。
+  # ~/.agents/skills から、Antigravity CLI (agy) の global skill は ~/.gemini/config/skills
+  # から読まれる。1 つの skill を 3 つ全部へ配る。
+  #
+  # agy は ~/.agents/skills を見ない (.agents/ を探すのは作業ディレクトリから
+  # リポジトリルートまでだけ)。~/.gemini/config/skills.json で ~/.agents/skills を
+  # 登録する手もあるが、そちらは組み込み skill より優先度が低いので symlink で並べる。
+  # nix store を指す symlink の skill も agy は読む (1.5.14 で `agy -p /skills` により確認)。
   targetsFor = name: [
     ".claude/skills/${name}"
     ".agents/skills/${name}"
+    ".gemini/config/skills/${name}"
   ];
 
   # home.file は source が存在しなくても黙ってリンク切れの symlink を作る。
@@ -46,7 +53,7 @@ in
       { archify = "''${inputs.archify-skill}/archify"; }
     '';
     description = ''
-      Claude Code / Codex へ配布する skill。属性名が skill dir 名、値がその source。
+      Claude Code / Codex / Antigravity CLI へ配布する skill。属性名が skill dir 名、値がその source。
 
       skill 本体が自身のディレクトリへ書き込まないことが前提。nix store への
       symlink (read-only) として配るため、書き込むものは home.activation など
