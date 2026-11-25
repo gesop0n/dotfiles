@@ -32,6 +32,11 @@ in
     fzf # git-gtr の `gtr cd` 引数なし時のコマンドパレットに必要
     inputs.envdiff.packages.${system}.default # .env 系ファイルを値を出さずにキー単位で比べる (自作)
     inputs.neondburl.packages.${system}.default # .env 系ファイルの DATABASE_URL の Neon endpoint を差し替える (自作)
+    # 1Password CLI (op)。公式 pkg の署名済みバイナリをそのまま置く (unfree)。
+    # デスクトップアプリ (homebrew.nix の cask) との連携に置き場所の制約があるのは
+    # 1Password for Mac 8.10.12 以前だけなので、/usr/local/bin へコピーする
+    # nix-darwin の programs._1password は使わない。
+    _1password-cli
 
     # Development Tools
     gh

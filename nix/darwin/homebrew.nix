@@ -40,6 +40,11 @@
       "tailscale-app"
       "obsidian"
       "zotero"
+      # 1Password のデスクトップアプリ。CLI (op) は home-manager/packages.nix の
+      # _1password-cli で入れ、Settings > Developer > Integrate with 1Password CLI で連携する。
+      # nix-darwin の programs._1password-gui は /Applications へ読み取り専用で rsync するため
+      # アプリの自己更新と噛み合わない。cask はアプリ自身の自動更新に任せられる。
+      "1password"
     ];
   };
 }
